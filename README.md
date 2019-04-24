@@ -11,7 +11,7 @@ The goal of FISMAtic is to reduce the amount of time spent authoring, reviewing,
 
 "The ATO process", as it's commonly called, is formally defined in the National Institute of Standards & Technology (NIST)'s [Risk Management Framework (RMF)](<https://csrc.nist.gov/projects/risk-management/risk-management-framework-(RMF)-Overview>):
 
-![NIST Risk Management Framework diagram](https://csrc.nist.gov/CSRC/media/Projects/Risk-Management/images-media/OrgRMF_v3.png)
+<img alt="NIST Risk Management Framework diagram" width="500" src="https://csrc.nist.gov/CSRC/media/Projects/Risk-Management/images-media/OrgRMF_v3.png"/>
 
 Security compliance is time consuming (and therefore expensive) for most organizations in and around the federal government. Two particular pain points were identified:
 
