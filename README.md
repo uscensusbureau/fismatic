@@ -22,7 +22,7 @@ This process was developed as a result of the [Federal Information Security Mana
 Security compliance is time consuming (and therefore expensive) for most organizations in and around the federal government. Two particular pain points were identified:
 
 - Select[ing] Controls that are appropriate for a given system
-- The back-and-forth between delivery teams and assessors Implement/Assess[ing the] Controls
+- The back-and-forth between delivery teams Implement[ing] and reviewers Assess[ing] Controls
 
 Delivery teams, who may or may not have experience writing System Security Plans (SSPs), spend a lot of time working on the language for security controls. This is then sent to the assessor, who may be pointing out common mistakes. Each of these back-and-forths can take days or weeks, costing staff hours on both sides and stretching out the time before the project can actually deliver value to users.
 
