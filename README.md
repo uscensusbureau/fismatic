@@ -1,8 +1,8 @@
-# FISMAtic
+# FISMAtic :zap:
 
 _Pronounced like "automatic", but starting with "fizz"._
 
-![Greased Lightning](https://r.hswstatic.com/w_907/gif/lightning-myths-9.jpg)
+<img alt="Greased Lightning" src="https://r.hswstatic.com/w_907/gif/lightning-myths-9.jpg" width="450"/>
 
 The goal of FISMAtic is to reduce the amount of time spent authoring, reviewing, and editing the security compliance documentation leading up to an Authority to Operate (ATO). We plan to build prototype(s) that:
 
