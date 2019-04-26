@@ -1,0 +1,9 @@
+*.docx
+*.doc
+*.py[cod]
+.vscode
+.0
+output.json
+*.index
+.DS_Store
+matrix.csv
