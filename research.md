@@ -59,14 +59,14 @@ Program teams interviewed citied caring about security and privacy, but there wa
 Security experience of assessors can vary greatly. Program teams had positive experiences when the assessors had technical background, and they could therefore talk through potential solutions with the program teams.
 
 > [Assessments are often] veering into art of security rather than the science of it.
-
+>
 > What's the interpretation of the control of the system you're building in the organization you're building it? That's the root of all evil with SSPs.
 
 Despite the thousands of pages of NIST documentation that surround ATO processes, there is a high degree of subjectivity in SSPs and assessments in terms of what is considered "good".
 
 > I don't think [assessors] look at 95% of what I give them...I find mistakes later that they should have caught.
 
-Assessment teams often hand program teams the compliance documentation requirements/templates, and only re-engage once the first draft is complete. There can be many months of turnaround time before and after this point, as the effort to complete (especially without experience – see A) and review the documentation is high.
+Assessment teams often hand program teams the compliance documentation requirements/templates, and only re-engage once the first draft is complete. There can be many months of turnaround time before and after this point, as the effort to complete (especially without experience – see [A](#a-program-teams-are-not-well-equipped-to-complete-atos)) and review the documentation is high.
 
 ## D) Compliance processes work best when there is close collaboration.
 
@@ -84,7 +84,7 @@ About half of the interviews mentioned the value of close collaboration and trus
 >
 > Hand-holding
 
-Unfortunately, a program team getting their assessor's time can be challenging, as noted in B. Multiple interviews also cited the importance of both sides being up front about their experience and shortcomings, rather than seeing the other side as an opponent.
+Unfortunately, a program team getting their assessor's time can be challenging, as noted in [B](#b-prioritization-of-securitycompliance-work-is-critical). Multiple interviews also cited the importance of both sides being up front about their experience and shortcomings, rather than seeing the other side as an opponent.
 
 ## E) There is power and confusion in inheritance.
 
@@ -93,7 +93,7 @@ Unfortunately, a program team getting their assessor's time can be challenging, 
 SSPs are generally Word documents that can be hundreds of pages in length. Interviewees estimated that only 10-40% of the content in those documents are unique to the system they correspond to; the rest is either boilerplate in the template, or is copied-and-pasted. There were two reasons cited for the latter:
 
 - Many controls are fulfilled by the agency and underlying platforms/services (enterprise hosting, single sign-on, etc.)
-- It's easier to find a similar system that's been approved and copy from their SSP than to write from scratch (see A)
+- It's easier to find a similar system that's been approved and copy from their SSP than to write from scratch (see [A](#a-program-teams-are-not-well-equipped-to-complete-atos))
 
 As noted in the quote above, leveraging this inheritance in authoring an SSP (through [OpenControl](https://github.com/opencontrol/schemas#why-opencontrol) or another tool) can result in massive reduction in time to ATO. The downsides are:
 
@@ -106,7 +106,7 @@ To complete ATOs, program team members and assessors in many agencies write in W
 
 > Everybody's [compliance] tool had 20% of reality.
 
-There are various commercial and open source tools available to help with compliance documentation workflows, including inheritance (see E). Even so, the majority of agencies aren't using them to their full extent, if at all. It's unclear how much of this is due to awareness vs cost vs features.
+There are various commercial and open source tools available to help with compliance documentation workflows, including inheritance (see [E](#e-there-is-power-and-confusion-in-inheritance)). Even so, the majority of agencies aren't using them to their full extent, if at all. It's unclear how much of this is due to awareness vs cost vs features.
 
 # Potential paths forward
 
@@ -128,7 +128,7 @@ Cons (specifically asked for feedback on this idea, hence the longest list for t
   - GSA (at least twice) and DHS worked on text extraction from SSPs, which was laborious.
 - Likely challenging to give substantive feedback
   - _"Seems like it will be a lot of work for little reward."_
-  - See subjectivity in C.
+  - See subjectivity in [C](#c-low-perceived-value-of-compliance-work-by-program-teams).
 - Even from human reviewers, there is often more noise than signal
 - Only possible for a machine learning-driven system to give feedback that's "you're like the other SSPs out there, or not
 - High effort for low value, relative to other options
