@@ -10,17 +10,7 @@ The Census Innovation & Operational Efficiency Program (IOE) awarded funding to 
 
 _FISMAtic Business Case_
 
-See the [Appendix](#appendix) for details about the interview process.
-
-# Terms
-
-- **Assessors:** Those that are responsible for checking the compliance of systems; sit in an agency's Security team.
-- **ATO package:** The SSP and other documentation needed to get an ATO.
-- **Authority to Operate (ATO):** The approval for a government system to be run in production, and the compliance process for getting there.
-- **Compliance:** Ensuring that a system meets minimum security requirements.
-- **Program teams** : Those who are trying to build/launch a system.
-- **Security:** The sum of processes and features safeguarding systems and data.
-- **System Security Plan (SSP):** The primary document in an ATO package, the bulk of which contains the [NIST 800-53 security controls](https://nvd.nist.gov/800-53/Rev4).
+See also: [overview of ATOs](https://atos.open-control.org), particularly the [terminology](https://atos.open-control.org/overview/#definitions). (Acronyms used in this doc are defined there.) See the [Appendix](#appendix) for details about the interview process.
 
 # Major findings
 
