@@ -194,21 +194,7 @@ Cons:
 
 # Appendix
 
-Over 3-4 weeks, the xD team conducted thirteen interviews using these questions:
-
-- Intro
-- What’s your role?
-- How many ATOs have you been involved with?
-- What role(s) have you played (formally or informally) as part of ATOs?
-- For system owners: What value have you gotten from people on the assessment side?
-- What are your challenges around the SSP?
-- What are the most common problems that cause back-and-forth delays?
-- What could make these interactions easier?
-- If you had access to a large number of SSPs in a machine-readable format and the time/skills/tools to analyze them, what would be the top five things you’d want to know from them?
-- Do you know of tools that give feedback?
-- Who else should I talk to?
-
-The interviews were conducted with people from the following organizations:
+Over 3-4 weeks, the xD team conducted thirteen interviews with people from the following organizations:
 
 - [Centers for Medicare and Medicaid (CMS)](https://www.cms.gov/)
 - [CivicActions](https://civicactions.com/)
@@ -229,4 +215,18 @@ Interviewees represented various stakeholder positions in the ATO process, with 
 - Startup Founder/CEO
 - System Owner
 
-They had each been involved with a number of ATOs, ranging anywhere from three to 200. All quotes in this document are taken directly from interviews.
+They had each been involved with a number of ATOs, ranging anywhere from three to 200. We had the following base questions:
+
+1. Intro
+1. What’s your role?
+1. How many ATOs have you been involved with?
+1. What role(s) have you played (formally or informally) as part of ATOs?
+1. For system owners: What value have you gotten from people on the assessment side?
+1. What are your challenges around the SSP?
+1. What are the most common problems that cause back-and-forth delays?
+1. What could make these interactions easier?
+1. If you had access to a large number of SSPs in a machine-readable format and the time/skills/tools to analyze them, what would be the top five things you’d want to know from them?
+1. Do you know of tools that give feedback?
+1. Who else should I talk to?
+
+All quotes in this document are taken directly from interviews.
