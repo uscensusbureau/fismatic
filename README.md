@@ -26,6 +26,10 @@ Delivery teams, who may or may not have experience writing System Security Plans
 
 **Our hypothesis is that we can reduce the time spent on the Select, Implement, and Assess Controls steps of the RMF through tooling.**
 
+## Research
+
+The summary of our research interviews is available [here](research.md).
+
 ## Call for collaborators
 
 If you’ve worked in this space or are interested in collaborating, please reach out in an issue or by email. Thanks! aidan.l.feldman@census.gov
