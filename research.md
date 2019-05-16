@@ -72,17 +72,12 @@ Assessment teams often hand program teams the compliance documentation requireme
 
 About half of the interviews mentioned the value of close collaboration and trust between the program teams and the assessors. The following terms were used about assessors in these cases:
 
-> Mutual understanding
->
-> Ground-truthing
->
-> Your SSP Sherpa
->
-> Here on a fact-finding mission, not to convict
->
-> Emotional support
->
-> Hand-holding
+> - Mutual understanding
+> - Ground-truthing
+> - Your SSP Sherpa
+> - Here on a fact-finding mission, not to convict
+> - Emotional support
+> - Hand-holding
 
 Unfortunately, a program team getting their assessor's time can be challenging, as noted in [B](#b-prioritization-of-securitycompliance-work-is-critical). Multiple interviews also cited the importance of both sides being up front about their experience and shortcomings, rather than seeing the other side as an opponent.
 
