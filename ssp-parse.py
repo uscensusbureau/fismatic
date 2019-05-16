@@ -11,8 +11,8 @@ from docx.table import Table, _Cell
 from docx.text.paragraph import Paragraph
 from nltk.tokenize import word_tokenize
 
-nltk.download('punkt')
-TARGET_DOC = 'ssp.docx'
+nltk.download("punkt")
+TARGET_DOC = "ssp.docx"
 
 
 def iter_block_items(parent):
@@ -39,7 +39,7 @@ def iter_block_items(parent):
             yield Table(child, parent)
 
 
-def get_control_summary(control='AC-1'):
+def get_control_summary(control="AC-1"):
     """TODO"""
     pass
 
@@ -53,8 +53,8 @@ def _is_control_summary(block):
         return False
     first_row = block.rows[0]
     try:
-        if first_row.cells[1].text.lower() == 'control summary information':
-            return (first_row.cells[0].text)
+        if first_row.cells[1].text.lower() == "control summary information":
+            return first_row.cells[0].text
         return False
     except IndexError:
         return False
@@ -71,13 +71,13 @@ def parse_control_table(table):
     origination = None
     for row in table.rows[1:]:
         for c in row.cells:
-            if c.text.strip().lower().startswith('responsible role:'):
-                responsible_role = c.text[len('responsible role:'):].split(',')
+            if c.text.strip().lower().startswith("responsible role:"):
+                responsible_role = c.text[len("responsible role:") :].split(",")
                 responsible_role = [role.strip() for role in responsible_role]
-            elif c.text.strip().startswith('Implementation Status'):
+            elif c.text.strip().startswith("Implementation Status"):
                 # return which box is checked
                 pass
-            elif c.text.strip().startswith('Control Origination'):
+            elif c.text.strip().startswith("Control Origination"):
                 # return which box is checked
                 pass
             else:
@@ -96,7 +96,7 @@ def parse_implementation_table(table):
     return implementations
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # Start parsing the doc...
     doc = Document(docx=TARGET_DOC)
 
@@ -118,11 +118,11 @@ if __name__ == '__main__':
         control = _is_control_summary(t)
         if control:
             c_dict = {
-                'control': control,
-                'responsible_role': None,
-                'imp_status': None,
-                'origination': None,
-                'implementation': {}
+                "control": control,
+                "responsible_role": None,
+                "imp_status": None,
+                "origination": None,
+                "implementation": {},
             }
             # print('Found %s...' % control)
             # TODO - parse_control_table(t)
@@ -134,10 +134,9 @@ if __name__ == '__main__':
 
             controls[control] = c_dict
         elif check_next and check_control:
-            controls[check_control].update({
-                'implementation':
-                parse_implementation_table(t)
-            })
+            controls[check_control].update(
+                {"implementation": parse_implementation_table(t)}
+            )
             check_next = False
             check_control = None
         else:
@@ -148,19 +147,21 @@ if __name__ == '__main__':
     all_desc = []
     desc_lkup = []
     for c, d in controls.items():
-        for i, txt in d['implementation'].items():
-            desc_lkup.append(': '.join([c, i]))
+        for i, txt in d["implementation"].items():
+            desc_lkup.append(": ".join([c, i]))
             all_desc.append(txt.strip().lower())
 
     print("Parsed %d controls" % len(controls.items()))
-    print('Comparing %d narratives from %d controls' % (len(all_desc),
-                                                        len(controls.items())))
     print(
-        '%d identical narratives found' % (len(all_desc) - len(set(all_desc))))
+        "Comparing %d narratives from %d controls"
+        % (len(all_desc), len(controls.items()))
+    )
+    print("%d identical narratives found" % (len(all_desc) - len(set(all_desc))))
 
-    gen_docs = [[
-        w.lower() for w in word_tokenize(text) if w not in string.punctuation
-    ] for text in all_desc]
+    gen_docs = [
+        [w.lower() for w in word_tokenize(text) if w not in string.punctuation]
+        for text in all_desc
+    ]
 
     dictionary = gensim.corpora.Dictionary(gen_docs)
     # print("Number of words in dictionary:", len(dictionary))
@@ -171,10 +172,11 @@ if __name__ == '__main__':
     tf_idf = gensim.models.TfidfModel(corpus)
 
     sims = gensim.similarities.Similarity(
-        './', tf_idf[corpus], num_features=len(dictionary))
+        "./", tf_idf[corpus], num_features=len(dictionary)
+    )
 
     index = gensim.similarities.MatrixSimilarity(tf_idf[corpus])
-    index.save('ssp.index')
+    index.save("ssp.index")
     diffs = []
 
     for i, sims in enumerate(index):
@@ -197,9 +199,9 @@ if __name__ == '__main__':
                     similar_count += 1
 
     # Matrix/spreadsheet output
-    with open('matrix.csv', 'w', newline='') as csvfile:
+    with open("matrix.csv", "w", newline="") as csvfile:
         writer = csv.writer(csvfile)
-        writer.writerow([''] + desc_lkup)
+        writer.writerow([""] + desc_lkup)
         for base_narrative, d in enumerate(diffs):
             row = [desc_lkup[base_narrative]] + d
             writer.writerow(row)
