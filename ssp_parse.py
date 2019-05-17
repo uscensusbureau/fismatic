@@ -13,7 +13,6 @@ from docx.text.paragraph import Paragraph
 from nltk.tokenize import word_tokenize
 
 nltk.download("punkt")
-TARGET_DOC = sys.argv[1]
 
 
 def iter_block_items(parent):
@@ -97,9 +96,9 @@ def parse_implementation_table(table):
     return implementations
 
 
-if __name__ == "__main__":
-    # Start parsing the doc...
-    doc = Document(docx=TARGET_DOC)
+def run(target_doc):
+    # Start parsing the doc..
+    doc = Document(docx=target_doc)
 
     tables = []
 
@@ -206,3 +205,8 @@ if __name__ == "__main__":
         for base_narrative, d in enumerate(diffs):
             row = [desc_lkup[base_narrative]] + d
             writer.writerow(row)
+
+
+if __name__ == "__main__":
+    target_doc = sys.argv[1]
+    run(target_doc)
