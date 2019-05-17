@@ -13,6 +13,7 @@ pipenv install
 ## Running
 
 1. Download an SSP as a `.docx` based on the [FedRAMP template](https://www.fedramp.gov/templates/).
+   - The [Azure Blueprint FedRAMP High SSP](https://www.microsoft.com/en-us/trustcenter/compliance/fedramp) is a good one to test with.
 1. Execute the script from within the virtual environment.
 
    ```sh
@@ -23,8 +24,11 @@ Outputs a matrix of difference measures between all control implementation narra
 
 ## Development
 
-Tests can be run with
+To run tests:
 
-```sh
-pytest
-```
+1. Download the [Azure Blueprint FedRAMP High SSP](https://www.microsoft.com/en-us/trustcenter/compliance/fedramp), and place the file in this directory.
+1. From this directory, run:
+
+   ```sh
+   pytest
+   ```
