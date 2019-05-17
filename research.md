@@ -42,7 +42,7 @@ Instead of treating all security controls as equal, a number of interviewees on 
 >
 > How much of all of this is putting lipstick on a pig?
 
-Program teams interviewed citied caring about security and privacy, but there was a perceived lack of value of compliance work, particularly the documentation and the assessors themselves. They saw that compliance work being distinct from the security of the systems they were building
+Program teams interviewed citied caring about security and privacy, but there was a perceived lack of value of compliance work, particularly the documentation and the assessors themselves. They saw that compliance work being distinct from the security of the systems they were building.
 
 > I've heard of good assessors...but my experience [in three agencies] has been really poor.
 
@@ -73,7 +73,9 @@ Unfortunately, a program team getting their assessor's time can be challenging, 
 
 ## E) There is power and confusion in inheritance.
 
-[Paraphrased] Using OpenControl took authoring time from nine months for the first system, to four months for the second, then down to two months for the third. I have a goal of two weeks.
+> Using OpenControl took authoring time from nine months for the first system, to four months for the second, then down to two months for the third. I have a goal of two weeks.
+
+_Paraphrased._
 
 SSPs are generally Word documents that can be hundreds of pages in length. Interviewees estimated that only 10-40% of the content in those documents are unique to the system they correspond to; the rest is either boilerplate in the template, or is copied-and-pasted. There were two reasons cited for the latter:
 
@@ -91,7 +93,12 @@ To complete ATOs, program team members and assessors in many agencies write in W
 
 > Everybody's [compliance] tool had 20% of reality.
 
-There are various commercial and open source tools available to help with compliance documentation workflows, including inheritance (see [E](#e-there-is-power-and-confusion-in-inheritance)). Even so, the majority of agencies aren't using them to their full extent, if at all. It's unclear how much of this is due to awareness vs cost vs features.
+There are various commercial and open source tools available to help with compliance documentation workflows, including inheritance (see [E](#e-there-is-power-and-confusion-in-inheritance)). Even so, the majority of agencies aren't using them to their full extent, if at all. It's unclear how much of this is due to each of the following:
+
+- Awareness
+- Cost
+- Missing features (as the quote above refers to)
+- Compliance team manangement not thinking in a user-centered way
 
 # Potential paths forward
 
@@ -118,21 +125,6 @@ Cons (specifically asked for feedback on this idea, hence the longest list for t
 - Only possible for a machine learning-driven system to give feedback that's "you're like the other SSPs out there, or not
 - High effort for low value, relative to other options
 
-## Surface SSP/control examples
-
-The highest-cited need from interviewees was having approved/good examples to draw from for inspiration/clarification, if not copying from directly. These examples can be hand-picked, purpose-written, or drawn dynamically from a larger set (perhaps from similar systems?).
-
-Pros:
-
-- The highest-cited request from interviewees
-- A step along the way to automated feedback and surfacing inheritable systems
-- MVP possible without writing any code
-
-Cons:
-
-- SSPs being considered sensitive likely an obstacle to making their controls broadly accessible
-- May require manual control selection/review/scrubbing
-
 ## Surface inheritable systems/controls
 
 Agencies have platforms and other General Support Systems (GSS's) that can be leveraged by program teams to reduce their technical and compliance burden. These providers, along with their compliance information, can be surfaced and more strongly encouraged.
@@ -147,6 +139,21 @@ Cons:
 
 - Only useful if those platforms are in place
 - Only desirable by program teams if those platforms will make their lives better
+
+## Surface SSP/control examples
+
+The highest-cited need from interviewees was having approved/good examples to draw from for inspiration/clarification, if not copying from directly. These examples can be hand-picked, purpose-written, or drawn dynamically from a larger set (perhaps from similar systems?).
+
+Pros:
+
+- The highest-cited request from interviewees
+- A step along the way to [automated feedback](#automated-feedback) and [surfacing inheritable systems](#surface-inheritable-systemscontrols)
+- MVP possible without writing any code
+
+Cons:
+
+- SSPs being considered sensitive likely an obstacle to making their controls broadly accessible
+- May require manual control selection/review/scrubbing
 
 ## Get security and compliance experience into program teams
 
