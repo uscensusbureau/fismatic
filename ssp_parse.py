@@ -39,6 +39,12 @@ def iter_block_items(parent):
             yield Table(child, parent)
 
 
+def get_tables(doc):
+    return [
+        block for block in iter_block_items(doc) if not isinstance(block, Paragraph)
+    ]
+
+
 def get_control_summary(control="AC-1"):
     """TODO"""
     pass
@@ -60,6 +66,11 @@ def _is_control_summary(block):
         return False
 
 
+def get_responsible_roles(cell):
+    responsible_role = cell.text[len("responsible role:") :].split(",")
+    return [role.strip() for role in responsible_role]
+
+
 def parse_control_table(table):
     """
     TODO
@@ -71,13 +82,13 @@ def parse_control_table(table):
     origination = None
     for row in table.rows[1:]:
         for c in row.cells:
-            if c.text.strip().lower().startswith("responsible role:"):
-                responsible_role = c.text[len("responsible role:") :].split(",")
-                responsible_role = [role.strip() for role in responsible_role]
-            elif c.text.strip().startswith("Implementation Status"):
+            text = c.text.strip()
+            if text.lower().startswith("responsible role:"):
+                responsible_role = get_responsible_roles(c)
+            elif text.startswith("Implementation Status"):
                 # return which box is checked
                 pass
-            elif c.text.strip().startswith("Control Origination"):
+            elif text.startswith("Control Origination"):
                 # return which box is checked
                 pass
             else:
@@ -96,17 +107,7 @@ def parse_implementation_table(table):
     return implementations
 
 
-def run(target_doc):
-    # Start parsing the doc..
-    doc = Document(docx=target_doc)
-
-    tables = []
-
-    for block in iter_block_items(doc):
-        """Control details are in tables, skip the rest"""
-        if not isinstance(block, Paragraph):
-            tables.append(block)
-
+def get_controls(tables):
     # Loop through all tables parsed from docx
     # If its a control summary table, add that control to our list
     # Then grab the implementation narratives from the following table
@@ -143,25 +144,18 @@ def run(target_doc):
             check_next = False
             check_control = None
 
-    # Add all implementation narratives to a list for similarity measurement
-    all_desc = []
-    desc_lkup = []
-    for c, d in controls.items():
-        for i, txt in d["implementation"].items():
-            desc_lkup.append(": ".join([c, i]))
-            all_desc.append(txt.strip().lower())
+    return controls
 
-    print("Parsed %d controls" % len(controls.items()))
-    print(
-        "Comparing %d narratives from %d controls"
-        % (len(all_desc), len(controls.items()))
-    )
-    print("%d identical narratives found" % (len(all_desc) - len(set(all_desc))))
 
-    gen_docs = [
+def get_gen_docs(all_desc):
+    return [
         [w.lower() for w in word_tokenize(text) if w not in string.punctuation]
         for text in all_desc
     ]
+
+
+def generate_diffs(all_desc):
+    gen_docs = get_gen_docs(all_desc)
 
     dictionary = gensim.corpora.Dictionary(gen_docs)
     # print("Number of words in dictionary:", len(dictionary))
@@ -185,6 +179,43 @@ def run(target_doc):
         for k, d in sims:
             diffs[i].append(d)
 
+    return diffs
+
+
+def write_matrix(desc_lkup, diffs):
+    with open("matrix.csv", "w", newline="") as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow([""] + desc_lkup)
+        for base_narrative, d in enumerate(diffs):
+            row = [desc_lkup[base_narrative]] + d
+            writer.writerow(row)
+
+
+def run(target_doc):
+    # Start parsing the doc..
+    doc = Document(docx=target_doc)
+
+    # Control details are in tables, skip the rest
+    tables = get_tables(doc)
+    controls = get_controls(tables)
+
+    # Add all implementation narratives to a list for similarity measurement
+    all_desc = []
+    desc_lkup = []
+    for c, d in controls.items():
+        for i, txt in d["implementation"].items():
+            desc_lkup.append(": ".join([c, i]))
+            all_desc.append(txt.strip().lower())
+
+    print("Parsed %d controls" % len(controls.items()))
+    print(
+        "Comparing %d narratives from %d controls"
+        % (len(all_desc), len(controls.items()))
+    )
+    print("%d identical narratives found" % (len(all_desc) - len(set(all_desc))))
+
+    diffs = generate_diffs(all_desc)
+
     very_similar = {}
     similar_count = 0
     # Find all control narratives which are identical or very similar (>0.8)
@@ -198,13 +229,7 @@ def run(target_doc):
                     output_key.update({compared_to: str(diff)})
                     similar_count += 1
 
-    # Matrix/spreadsheet output
-    with open("matrix.csv", "w", newline="") as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerow([""] + desc_lkup)
-        for base_narrative, d in enumerate(diffs):
-            row = [desc_lkup[base_narrative]] + d
-            writer.writerow(row)
+    write_matrix(desc_lkup, diffs)
 
 
 if __name__ == "__main__":
