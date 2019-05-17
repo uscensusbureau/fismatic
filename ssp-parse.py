@@ -1,5 +1,6 @@
 import csv
 import string
+import sys
 
 import gensim
 import nltk
@@ -12,7 +13,7 @@ from docx.text.paragraph import Paragraph
 from nltk.tokenize import word_tokenize
 
 nltk.download("punkt")
-TARGET_DOC = "ssp.docx"
+TARGET_DOC = sys.argv[1]
 
 
 def iter_block_items(parent):
