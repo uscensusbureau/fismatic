@@ -178,6 +178,7 @@ Pros:
 - Less work for program teams and assessors
 - High-priority controls can still be covered
 - Census's Office of Information Security (OIS) requested a tool to help with control selection when FISMAtic was first pitched, so meeting a known internal need
+- Goes hand in hand with / can be made possible through [greater inheritance](#surface-inheritable-systemscontrols)
 
 Cons:
 
