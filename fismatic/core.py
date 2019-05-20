@@ -1,6 +1,5 @@
 import csv
 import string
-import sys
 
 import gensim
 import nltk
@@ -217,6 +216,7 @@ def print_similarity(very_similar):
         keys = list(similar_to.keys())
         print(", ".join(keys))
 
+
 def run(target_doc):
     # Start parsing the doc..
     doc = Document(docx=target_doc)
@@ -245,8 +245,3 @@ def run(target_doc):
 
     very_similar = similar_controls(desc_lkup, diffs)
     print_similarity(very_similar)
-
-
-if __name__ == "__main__":
-    target_doc = sys.argv[1]
-    run(target_doc)

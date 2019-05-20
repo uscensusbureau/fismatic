@@ -1,13 +1,13 @@
 import csv
 from docx import Document
 import itertools
-import ssp_parse
+from .. import core as fismatic
 
 SOURCE_DOC = "Azure Security and Compliance Blueprint - FedRAMP High SSP.docx"
 
 
 def test_matrix():
-    ssp_parse.run(SOURCE_DOC)
+    fismatic.run(SOURCE_DOC)
 
     with open("matrix.csv") as csv_file:
         csv_reader = csv.DictReader(csv_file)
@@ -28,9 +28,9 @@ def test_matrix():
 
 def test_get_controls():
     doc = Document(docx=SOURCE_DOC)
-    tables = ssp_parse.get_tables(doc)
+    tables = fismatic.get_tables(doc)
 
-    controls = ssp_parse.get_controls(tables)
+    controls = fismatic.get_controls(tables)
 
     control_ids = list(controls.keys())
     # TODO address inconsistent spacing
