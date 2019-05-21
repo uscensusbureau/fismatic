@@ -1,7 +1,10 @@
 import csv
 import string
-import gensim
+import nltk
 from nltk.tokenize import word_tokenize
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+nltk.download("punkt")
 
 
 def get_gen_doc(text):
@@ -9,37 +12,14 @@ def get_gen_doc(text):
     return [w.lower() for w in word_tokenize(text) if w not in string.punctuation]
 
 
-def get_gen_docs(all_desc):
-    """Returns an array of arrays of tokenized terms."""
-    return [get_gen_doc(text) for text in all_desc]
+TfidfVec = TfidfVectorizer(tokenizer=get_gen_doc)
 
 
 def generate_diffs(all_desc):
-    gen_docs = get_gen_docs(all_desc)
-
-    dictionary = gensim.corpora.Dictionary(gen_docs)
-    # print("Number of words in dictionary:", len(dictionary))
-    # for i in range(len(dictionary)):
-    #     print(i, dictionary[i])
-
-    corpus = [dictionary.doc2bow(gen_doc) for gen_doc in gen_docs]
-    tf_idf = gensim.models.TfidfModel(corpus)
-
-    sims = gensim.similarities.Similarity(
-        "./", tf_idf[corpus], num_features=len(dictionary)
-    )
-
-    index = gensim.similarities.MatrixSimilarity(tf_idf[corpus])
-    index.save("ssp.index")
-    diffs = []
-
-    for i, sims in enumerate(index):
-        diffs.append([])
-        sims = sorted(enumerate(sims), key=lambda item: item[0])
-        for k, d in sims:
-            diffs[i].append(d)
-
-    return diffs
+    # Part f of
+    # https://sites.temple.edu/tudsc/2017/03/30/measuring-similarity-between-texts-in-python/
+    tfidf = TfidfVec.fit_transform(all_desc)
+    return (tfidf * tfidf.T).toarray()
 
 
 def similar_controls(desc_lkup, diffs):
@@ -65,8 +45,8 @@ def write_matrix(desc_lkup, diffs):
     with open("matrix.csv", "w", newline="") as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow([""] + desc_lkup)
-        for base_narrative, d in enumerate(diffs):
-            row = [desc_lkup[base_narrative]] + d
+        for base_narrative, row_diffs in enumerate(diffs):
+            row = [desc_lkup[base_narrative]] + list(row_diffs)
             writer.writerow(row)
 
 
