@@ -11,7 +11,7 @@ def run(target_doc):
     all_desc = []
     desc_lkup = []
     for c, d in controls.items():
-        for i, txt in d["implementation"].items():
+        for i, txt in d.implementation.items():
             desc_lkup.append(": ".join([c, i]))
             all_desc.append(txt.strip().lower())
 

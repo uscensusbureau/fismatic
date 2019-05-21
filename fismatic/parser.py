@@ -6,6 +6,7 @@ from docx.oxml.text.paragraph import CT_P
 from docx.table import Table, _Cell
 from docx.text.paragraph import Paragraph
 from nltk.tokenize import word_tokenize
+from .control import Control
 
 nltk.download("punkt")
 
@@ -40,12 +41,11 @@ def get_tables(doc):
     ]
 
 
-def get_control_summary(control="AC-1"):
+def get_control_summary_for(control="AC-1"):
     """TODO"""
-    pass
 
 
-def _is_control_summary(block):
+def get_control_summary(block):
     """
     True if table contains control summary information
     2nd cell in first row of table contains "control summary information"
@@ -111,28 +111,22 @@ def get_controls(tables):
     check_control = None
 
     for t in tables:
-        control = _is_control_summary(t)
-        if control:
-            c_dict = {
-                "control": control,
-                "responsible_role": None,
-                "imp_status": None,
-                "origination": None,
-                "implementation": {},
-            }
+        name = get_control_summary(t)
+        if name:
+            control = Control()
+            control.name = name
             # print('Found %s...' % control)
             # TODO - parse_control_table(t)
 
             # Next table in the doc is implementation narratives
             check_next = True
             # Need to keep control reference until we grab implementation
-            check_control = control
+            check_control = name
 
-            controls[control] = c_dict
+            controls[name] = control
         elif check_next and check_control:
-            controls[check_control].update(
-                {"implementation": parse_implementation_table(t)}
-            )
+            control = controls[check_control]
+            control.implementation = parse_implementation_table(t)
             check_next = False
             check_control = None
         else:
