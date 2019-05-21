@@ -10,16 +10,14 @@ def run(target_doc):
     # Add all implementation narratives to a list for similarity measurement
     all_desc = []
     desc_lkup = []
-    for c, d in controls.items():
-        for i, txt in d.implementation.items():
-            desc_lkup.append(": ".join([c, i]))
+    for name, control in controls.items():
+        for part, txt in control.implementation.items():
+            desc_lkup.append(": ".join([name, part]))
             all_desc.append(txt.strip().lower())
 
-    print("Parsed %d controls" % len(controls.items()))
-    print(
-        "Comparing %d narratives from %d controls"
-        % (len(all_desc), len(controls.items()))
-    )
+    num_controls = len(controls.items())
+    print("Parsed %d controls" % num_controls)
+    print("Comparing %d narratives from %d controls" % (len(all_desc), num_controls))
     print("%d identical narratives found" % (len(all_desc) - len(set(all_desc))))
 
     diffs = similarity.generate_diffs(all_desc)
