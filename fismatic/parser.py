@@ -113,8 +113,8 @@ def get_controls(tables):
     for t in tables:
         name = get_control_summary(t)
         if name:
-            control = Control()
-            control.name = name
+            control = Control(name=name)
+            name = control.normalized_name()
             # print('Found %s...' % control)
             # TODO - parse_control_table(t)
 
