@@ -1,11 +1,9 @@
 import nltk
-from docx import Document
 from docx.document import Document as _Document
 from docx.oxml.table import CT_Tbl
 from docx.oxml.text.paragraph import CT_P
 from docx.table import Table, _Cell
 from docx.text.paragraph import Paragraph
-from nltk.tokenize import word_tokenize
 from .control import Control
 
 nltk.download("punkt")
@@ -72,14 +70,12 @@ def parse_control_table(table):
     extract data from control summary table
     Not sure how to detect checked boxes
     """
-    responsible_role = None
-    imp_status = None
-    origination = None
+    result = {"responsible_role": None, "imp_status": None, "origination": None}
     for row in table.rows[1:]:
         for c in row.cells:
             text = c.text.strip()
             if text.lower().startswith("responsible role:"):
-                responsible_role = get_responsible_roles(c)
+                result["responsible_role"] = get_responsible_roles(c)
             elif text.startswith("Implementation Status"):
                 # return which box is checked
                 pass

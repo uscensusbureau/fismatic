@@ -1,14 +1,12 @@
 import csv
 import string
 import gensim
-from . import parser
+from nltk.tokenize import word_tokenize
 
 
 def get_gen_doc(text):
     """Returns an array of tokenized terms."""
-    return [
-        w.lower() for w in parser.word_tokenize(text) if w not in string.punctuation
-    ]
+    return [w.lower() for w in word_tokenize(text) if w not in string.punctuation]
 
 
 def get_gen_docs(all_desc):

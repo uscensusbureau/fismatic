@@ -1,6 +1,4 @@
 import csv
-from docx import Document
-import itertools
 from . import common
 from .. import core as fismatic
 

@@ -1,4 +1,3 @@
-from docx import Document
 from .docx_parser import DocxParser
 from . import similarity
 
