@@ -1,10 +1,10 @@
 from docx import Document
-from .fedramp_parser import FedrampParser
+from .docx_parser import DocxParser
 from . import similarity
 
 
 def run(target_doc):
-    parser = FedrampParser(target_doc)
+    parser = DocxParser(target_doc)
     controls = parser.get_controls()
 
     # Add all implementation narratives to a list for similarity measurement

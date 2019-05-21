@@ -2,7 +2,7 @@ from docx import Document
 from . import parser
 
 
-class FedrampParser:
+class DocxParser:
     def __init__(self, doc_path):
         self.doc = Document(docx=doc_path)
 

@@ -1,13 +1,11 @@
-from docx import Document
 from . import common
-from .. import parser
+from ..docx_parser import DocxParser
 
 
 def test_get_controls():
-    doc = Document(docx=common.SOURCE_DOC)
-    tables = parser.get_tables(doc)
+    parser = DocxParser(common.SOURCE_DOC)
 
-    controls = parser.get_controls(tables)
+    controls = parser.get_controls()
 
     control_ids = list(controls.keys())
     # TODO address inconsistent spacing
