@@ -1,15 +1,11 @@
 from docx import Document
-from . import parser
+from .fedramp_parser import FedrampParser
 from . import similarity
 
 
 def run(target_doc):
-    # Start parsing the doc..
-    doc = Document(docx=target_doc)
-
-    # Control details are in tables, skip the rest
-    tables = parser.get_tables(doc)
-    controls = parser.get_controls(tables)
+    parser = FedrampParser(target_doc)
+    controls = parser.get_controls()
 
     # Add all implementation narratives to a list for similarity measurement
     all_desc = []
