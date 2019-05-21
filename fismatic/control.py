@@ -1,8 +1,7 @@
 class Control:
-    responsible_role = None
-    imp_status = None
-    origination = None
-    implementation = None
-
     def __init__(self):
+        self.name = None
+        self.responsible_role = None
+        self.imp_status = None
+        self.origination = None
         self.implementation = {}
