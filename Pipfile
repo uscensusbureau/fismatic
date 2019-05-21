@@ -11,6 +11,8 @@ gensim = "*"
 [dev-packages]
 black = "*"
 pytest = "*"
+autoflake = "*"
+rope = "*"
 
 [requires]
 python_version = "3.6"
