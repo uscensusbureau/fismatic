@@ -6,7 +6,7 @@ name = "pypi"
 [packages]
 python-docx = "*"
 nltk = "*"
-gensim = "*"
+scikit-learn = "*"
 
 [dev-packages]
 black = "*"

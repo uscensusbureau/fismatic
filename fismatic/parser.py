@@ -1,12 +1,9 @@
-import nltk
 from docx.document import Document as _Document
 from docx.oxml.table import CT_Tbl
 from docx.oxml.text.paragraph import CT_P
 from docx.table import Table, _Cell
 from docx.text.paragraph import Paragraph
 from .control import Control
-
-nltk.download("punkt")
 
 
 def iter_block_items(parent):
