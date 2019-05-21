@@ -4,11 +4,16 @@ import gensim
 from . import parser
 
 
-def get_gen_docs(all_desc):
+def get_gen_doc(text):
+    """Returns an array of tokenized terms."""
     return [
-        [w.lower() for w in parser.word_tokenize(text) if w not in string.punctuation]
-        for text in all_desc
+        w.lower() for w in parser.word_tokenize(text) if w not in string.punctuation
     ]
+
+
+def get_gen_docs(all_desc):
+    """Returns an array of arrays of tokenized terms."""
+    return [get_gen_doc(text) for text in all_desc]
 
 
 def generate_diffs(all_desc):
