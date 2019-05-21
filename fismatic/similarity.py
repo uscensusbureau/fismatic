@@ -1,7 +1,7 @@
-import csv
 import string
 import nltk
 from nltk.tokenize import word_tokenize
+import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 nltk.download("punkt")
@@ -42,12 +42,9 @@ def similar_controls(desc_lkup, diffs):
 
 
 def write_matrix(desc_lkup, diffs):
-    with open("matrix.csv", "w", newline="") as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerow([""] + desc_lkup)
-        for base_narrative, row_diffs in enumerate(diffs):
-            row = [desc_lkup[base_narrative]] + list(row_diffs)
-            writer.writerow(row)
+    # https://stackoverflow.com/a/11146434/358804
+    df = pd.DataFrame(diffs, index=desc_lkup, columns=desc_lkup)
+    df.to_csv("matrix.csv", index=True, header=True)
 
 
 def print_similarity(very_similar):
