@@ -2,13 +2,15 @@
 
 Rough script exploring approaches to extract control details from a FedRAMP SSP Word document template and analyzing them for similarity of implementation narratives.
 
-## Installation
+## Setup
 
-Install dependencies using [Pipenv](https://docs.pipenv.org/en/latest/):
+1. Install Python 3.
+1. Install [Pipenv](https://docs.pipenv.org/en/latest/).
+1. Install Python packages.
 
-```sh
-pipenv install
-```
+   ```sh
+   pipenv install
+   ```
 
 ## Running
 
