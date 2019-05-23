@@ -19,8 +19,8 @@ def run(target_doc):
     print("Comparing %d narratives from %d controls" % (len(all_desc), num_controls))
     print("%d identical narratives found" % (len(all_desc) - len(set(all_desc))))
 
-    diffs = similarity.generate_diffs(all_desc)
-    similarity.write_matrix(desc_lkup, diffs)
+    diffs = similarity.generate_diffs_with_labels(desc_lkup, all_desc)
+    similarity.write_matrix(diffs)
 
-    very_similar = similarity.similar_controls(desc_lkup, diffs)
+    very_similar = similarity.similar_controls(diffs)
     similarity.print_similarity(very_similar)

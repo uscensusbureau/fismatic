@@ -1,7 +1,8 @@
-import csv
 import string
+import numpy as np
 import nltk
 from nltk.tokenize import word_tokenize
+import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 nltk.download("punkt")
@@ -16,43 +17,39 @@ TfidfVec = TfidfVectorizer(tokenizer=get_gen_doc)
 
 
 def generate_diffs(all_desc):
+    """Returns the similarity scores between controls."""
     # Part f of
     # https://sites.temple.edu/tudsc/2017/03/30/measuring-similarity-between-texts-in-python/
     tfidf = TfidfVec.fit_transform(all_desc)
     return (tfidf * tfidf.T).toarray()
 
 
-def similar_controls(desc_lkup, diffs):
+def generate_diffs_with_labels(desc_lkup, all_desc):
+    """Returns a Pandas DataFrame of the similarity scores between controls."""
+    matrix = generate_diffs(all_desc)
+    return pd.DataFrame(matrix, index=desc_lkup, columns=desc_lkup)
+
+
+def similar_controls(diffs):
     """Find all control narratives which are identical or very similar (>0.8)."""
+    # exclude the controls matching themselves
+    np.fill_diagonal(diffs.values, np.nan)
 
-    very_similar = {}
-    similar_count = 0
-    for base_narrative, d in enumerate(diffs):
-        base = desc_lkup[base_narrative]
-        for compared_narrative, diff in enumerate(d):
-            if diff > 0.8:
-                compared_to = desc_lkup[compared_narrative]
-                if base != compared_to:
-                    output_key = very_similar.setdefault(base, {})
-                    output_key.update({compared_to: str(diff)})
-                    # TODO don't double-count for both sides of the similarity matrix
-                    similar_count += 1
-
-    return very_similar
+    return {
+        control_name: similarities[similarities > 0.8].to_dict()
+        for control_name, similarities in diffs.iteritems()
+    }
 
 
-def write_matrix(desc_lkup, diffs):
-    with open("matrix.csv", "w", newline="") as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerow([""] + desc_lkup)
-        for base_narrative, row_diffs in enumerate(diffs):
-            row = [desc_lkup[base_narrative]] + list(row_diffs)
-            writer.writerow(row)
+def write_matrix(diffs):
+    # https://stackoverflow.com/a/11146434/358804
+    diffs.to_csv("matrix.csv", index=True, header=True)
 
 
 def print_similarity(very_similar):
     print("Similar controls:")
     for control, similar_to in very_similar.items():
-        print("------- {} -------".format(control))
-        keys = list(similar_to.keys())
-        print(", ".join(keys))
+        if similar_to:
+            print("------- {} -------".format(control))
+            keys = list(similar_to.keys())
+            print(", ".join(keys))
