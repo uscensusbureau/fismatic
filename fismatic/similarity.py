@@ -5,8 +5,6 @@ from nltk.tokenize import word_tokenize
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-nltk.download("punkt")
-
 
 def get_gen_doc(text):
     """Returns an array of tokenized terms."""
