@@ -15,9 +15,11 @@ def run(target_doc):
             all_desc.append(txt.strip().lower())
 
     num_controls = len(controls.items())
-    print("Parsed %d controls" % num_controls)
-    print("Comparing %d narratives from %d controls" % (len(all_desc), num_controls))
-    print("%d identical narratives found" % (len(all_desc) - len(set(all_desc))))
+    print("Parsed {} controls".format(num_controls))
+    print(
+        "Comparing {} narratives from {} controls".format(len(all_desc), num_controls)
+    )
+    print("{} identical narratives found".format(len(all_desc) - len(set(all_desc))))
 
     diffs = similarity.generate_diffs_with_labels(desc_lkup, all_desc)
     similarity.write_matrix(diffs)
