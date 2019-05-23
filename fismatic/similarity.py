@@ -17,29 +17,33 @@ TfidfVec = TfidfVectorizer(tokenizer=get_gen_doc)
 
 
 def generate_diffs(all_desc):
+    """Returns the similarity scores between controls."""
     # Part f of
     # https://sites.temple.edu/tudsc/2017/03/30/measuring-similarity-between-texts-in-python/
     tfidf = TfidfVec.fit_transform(all_desc)
     return (tfidf * tfidf.T).toarray()
 
 
-def similar_controls(desc_lkup, diffs):
-    """Find all control narratives which are identical or very similar (>0.8)."""
+def generate_diffs_with_labels(desc_lkup, all_desc):
+    """Returns a Pandas DataFrame of the similarity scores between controls."""
+    matrix = generate_diffs(all_desc)
+    return pd.DataFrame(matrix, index=desc_lkup, columns=desc_lkup)
 
-    df = pd.DataFrame(diffs, index=desc_lkup, columns=desc_lkup)
+
+def similar_controls(diffs):
+    """Find all control narratives which are identical or very similar (>0.8)."""
     # exclude the controls matching themselves
-    np.fill_diagonal(df.values, np.nan)
+    np.fill_diagonal(diffs.values, np.nan)
 
     return {
         control_name: similarities[similarities > 0.8].to_dict()
-        for control_name, similarities in df.iteritems()
+        for control_name, similarities in diffs.iteritems()
     }
 
 
-def write_matrix(desc_lkup, diffs):
+def write_matrix(diffs):
     # https://stackoverflow.com/a/11146434/358804
-    df = pd.DataFrame(diffs, index=desc_lkup, columns=desc_lkup)
-    df.to_csv("matrix.csv", index=True, header=True)
+    diffs.to_csv("matrix.csv", index=True, header=True)
 
 
 def print_similarity(very_similar):
