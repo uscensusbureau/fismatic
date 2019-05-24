@@ -17,20 +17,6 @@ class DocxParser:
         tables = self.get_tables()
         return parser.get_controls(tables)
 
-    def get_implementations_by_id(self):
-        return self.control_set.get_implementations_by_id()
-
-    def num_controls(self):
-        return self.control_set.num_controls()
-
-    def num_implementations(self):
-        return self.control_set.num_implementations()
-
-    def num_unique_implementations(self):
-        return self.control_set.num_unique_implementations()
-
-    def num_identical_implementations(self):
-        return self.control_set.num_identical_implementations()
-
-    def num_words(self):
-        return self.control_set.num_words()
+    def get_control_set(self):
+        controls = self.get_controls().values()
+        return ControlSet(controls)
