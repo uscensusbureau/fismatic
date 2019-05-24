@@ -96,6 +96,8 @@ def parse_implementation_table(table):
 
 
 def get_controls(tables):
+    """Returns a dictionary of controls by name."""
+
     # Loop through all tables parsed from docx
     # If its a control summary table, add that control to our list
     # Then grab the implementation narratives from the following table

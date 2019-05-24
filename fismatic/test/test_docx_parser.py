@@ -19,8 +19,3 @@ def test_implementation():
     implementation = control.implementation["Part a"]
     assert "Microsoft Azure" in implementation
     assert "customer is responsible" in implementation
-
-
-def test_num_words():
-    parser = DocxParser(common.SOURCE_DOC)
-    assert parser.num_words() > 30000

@@ -1,12 +1,13 @@
 from docx import Document
-from functools import reduce
 from . import parser
-from .similarity import tokenize
+from .control_set import ControlSet
 
 
 class DocxParser:
     def __init__(self, doc_path):
         self.doc = Document(docx=doc_path)
+        controls = self.get_controls().values()
+        self.control_set = ControlSet(controls)
 
     def get_tables(self):
         return parser.get_tables(self.doc)
@@ -17,35 +18,19 @@ class DocxParser:
         return parser.get_controls(tables)
 
     def get_implementations_by_id(self):
-        """The ID (key) is the control name + part."""
-        result = {}
-
-        controls = self.get_controls()
-        for name, control in controls.items():
-            for part, txt in control.implementation.items():
-                key = ": ".join([name, part])
-                val = txt.strip().lower()
-                result[key] = val
-
-        return result
+        return self.control_set.get_implementations_by_id()
 
     def num_controls(self):
-        controls = self.get_controls()
-        return len(controls.items())
+        return self.control_set.num_controls()
 
     def num_implementations(self):
-        implementations_by_id = self.get_implementations_by_id()
-        return len(implementations_by_id)
+        return self.control_set.num_implementations()
 
     def num_unique_implementations(self):
-        implementations_by_id = self.get_implementations_by_id()
-        return len(set(implementations_by_id.values()))
+        return self.control_set.num_unique_implementations()
 
     def num_identical_implementations(self):
-        return self.num_implementations() - self.num_unique_implementations()
+        return self.control_set.num_identical_implementations()
 
     def num_words(self):
-        implementations_by_id = self.get_implementations_by_id()
-        return reduce(
-            lambda sum, imp: sum + len(tokenize(imp)), implementations_by_id.values(), 0
-        )
+        return self.control_set.num_words()
