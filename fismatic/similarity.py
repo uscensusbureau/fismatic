@@ -30,20 +30,20 @@ def generate_diffs_with_labels(implementations_by_id):
     return pd.DataFrame(matrix, index=desc_lkup, columns=desc_lkup)
 
 
-def similar_controls(diffs):
-    """Find all control narratives which are identical or very similar (>0.8)."""
+def similar_controls(diffs, threshold=0.8):
+    """Find all control narratives which are identical or very similar (greater than the provided number)."""
     # exclude the controls matching themselves
     np.fill_diagonal(diffs.values, np.nan)
 
     return {
-        control_name: similarities[similarities > 0.8].to_dict()
+        control_name: similarities[similarities > threshold].to_dict()
         for control_name, similarities in diffs.iteritems()
     }
 
 
-def write_matrix(diffs):
+def write_matrix(diffs, filename="matrix.csv"):
     # https://stackoverflow.com/a/11146434/358804
-    diffs.to_csv("matrix.csv", index=True, header=True)
+    diffs.to_csv(filename, index=True, header=True)
 
 
 def print_similarity(very_similar):
