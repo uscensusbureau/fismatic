@@ -13,3 +13,16 @@ class DocxParser:
         # Control details are in tables, skip the rest
         tables = self.get_tables()
         return parser.get_controls(tables)
+
+    def get_implementations_by_id(self):
+        """The ID (key) is the control name + part."""
+        result = {}
+
+        controls = self.get_controls()
+        for name, control in controls.items():
+            for part, txt in control.implementation.items():
+                key = ": ".join([name, part])
+                val = txt.strip().lower()
+                result[key] = val
+
+        return result

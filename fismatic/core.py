@@ -7,12 +7,9 @@ def run(target_doc):
     controls = parser.get_controls()
 
     # Add all implementation narratives to a list for similarity measurement
-    all_desc = []
-    desc_lkup = []
-    for name, control in controls.items():
-        for part, txt in control.implementation.items():
-            desc_lkup.append(": ".join([name, part]))
-            all_desc.append(txt.strip().lower())
+    implementations_by_id = parser.get_implementations_by_id()
+    all_desc = implementations_by_id.values()
+    desc_lkup = implementations_by_id.keys()
 
     num_controls = len(controls.items())
     print("Parsed {} controls".format(num_controls))
