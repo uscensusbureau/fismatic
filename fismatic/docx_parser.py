@@ -26,3 +26,18 @@ class DocxParser:
                 result[key] = val
 
         return result
+
+    def num_controls(self):
+        controls = self.get_controls()
+        return len(controls.items())
+
+    def num_implementations(self):
+        implementations_by_id = self.get_implementations_by_id()
+        return len(implementations_by_id)
+
+    def num_unique_implementations(self):
+        implementations_by_id = self.get_implementations_by_id()
+        return len(set(implementations_by_id.values()))
+
+    def num_identical_implementations(self):
+        return self.num_implementations() - self.num_unique_implementations()

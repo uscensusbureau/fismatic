@@ -22,8 +22,10 @@ def generate_diffs(all_desc):
     return (tfidf * tfidf.T).toarray()
 
 
-def generate_diffs_with_labels(desc_lkup, all_desc):
+def generate_diffs_with_labels(implementations_by_id):
     """Returns a Pandas DataFrame of the similarity scores between controls."""
+    all_desc = implementations_by_id.values()
+    desc_lkup = implementations_by_id.keys()
     matrix = generate_diffs(all_desc)
     return pd.DataFrame(matrix, index=desc_lkup, columns=desc_lkup)
 
