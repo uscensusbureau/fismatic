@@ -1,14 +1,27 @@
 import csv
 import os.path
 import pandas as pd
+import pytest
 from . import common
 from .. import core as fismatic
 
 
-def test_glob_input():
-    fismatic.run("*.docx")
-    outfile = "out/Azure Security and Compliance Blueprint - FedRAMP High SSP.csv"
-    assert os.path.exists(outfile)
+@pytest.mark.parametrize(
+    "test_input,expected",
+    [
+        (common.SOURCE_DOC, [common.SOURCE_DOC]),  # single file
+        (".", [common.SOURCE_DOC]),  # directory with docx
+        ("out", []),  # directory without docx
+    ],
+)
+def test_get_files(test_input, expected):
+    result = fismatic.get_files(test_input)
+
+    # absolute-ize the paths so that it doesn't fail due to leading `./`s
+    result = [os.path.abspath(p) for p in result]
+    expected = [os.path.abspath(p) for p in expected]
+
+    assert result == expected
 
 
 def test_matrix():

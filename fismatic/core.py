@@ -30,15 +30,29 @@ def report(outfile, control_set):
     similarity.print_similarity(very_similar)
 
 
-def run(input_path):
-    files = glob.glob(input_path)
-    if not files:
-        print("No files found matching the input path.", file=sys.stderr)
+def get_files(input_path):
+    if os.path.isdir(input_path):
+        # only process docx
+        pattern = os.path.join(input_path, "*.docx")
+        files = glob.glob(pattern)
+        if not files:
+            print("No docx files found.", file=sys.stderr)
+        return files
+    else:
+        return [input_path]
 
+
+def process_file(input_file):
+    print("---------------\nParsing {} ...".format(input_file))
+    parser = DocxParser(input_file)
+    control_set = parser.get_control_set()
+    outfile = os.path.join("out", input_file.replace(".docx", ".csv"))
+    report(outfile, control_set)
+
+
+def run(input_path):
+    files = get_files(input_path)
     os.makedirs("out", exist_ok=True)
+
     for input_file in files:
-        print("---------------\nParsing {} ...".format(input_file))
-        parser = DocxParser(input_file)
-        control_set = parser.get_control_set()
-        outfile = os.path.join("out", input_file.replace(".docx", ".csv"))
-        report(outfile, control_set)
+        process_file(input_file)

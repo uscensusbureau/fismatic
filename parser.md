@@ -28,7 +28,7 @@ Rough script exploring approaches to extract control details from a FedRAMP SSP 
    pipenv run python run.py <path>
    ```
 
-The `path` can be a specific file, or a [glob](https://docs.python.org/3/library/glob.html)/directory. Outputs one matrix of difference measures between all control implementation narratives per input file under `out/`.
+The `path` can be a specific file, or a directory. Outputs one matrix of difference measures between all control implementation narratives per input file under `out/`.
 
 ## Development
 
