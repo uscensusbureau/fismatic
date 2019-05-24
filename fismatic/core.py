@@ -9,6 +9,7 @@ def run(target_doc):
     num_controls = parser.num_controls()
     num_implementations = parser.num_implementations()
     print("Parsed {} controls".format(num_controls))
+    print("{} total words in the controls.".format(parser.num_words()))
     print(
         "Comparing {} narratives from {} controls".format(
             num_implementations, num_controls

@@ -1,5 +1,7 @@
 from docx import Document
+from functools import reduce
 from . import parser
+from .similarity import tokenize
 
 
 class DocxParser:
@@ -41,3 +43,9 @@ class DocxParser:
 
     def num_identical_implementations(self):
         return self.num_implementations() - self.num_unique_implementations()
+
+    def num_words(self):
+        implementations_by_id = self.get_implementations_by_id()
+        return reduce(
+            lambda sum, imp: sum + len(tokenize(imp)), implementations_by_id.values(), 0
+        )

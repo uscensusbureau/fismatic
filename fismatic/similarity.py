@@ -6,12 +6,12 @@ import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 
-def get_gen_doc(text):
+def tokenize(text):
     """Returns an array of tokenized terms."""
     return [w.lower() for w in word_tokenize(text) if w not in string.punctuation]
 
 
-TfidfVec = TfidfVectorizer(tokenizer=get_gen_doc)
+TfidfVec = TfidfVectorizer(tokenizer=tokenize)
 
 
 def generate_diffs(all_desc):
