@@ -7,7 +7,10 @@ from .. import core as fismatic
 def test_matrix():
     fismatic.run(common.SOURCE_DOC)
 
-    df = pd.read_csv("matrix.csv", index_col=0)
+    df = pd.read_csv(
+        "out/Azure Security and Compliance Blueprint - FedRAMP High SSP.csv",
+        index_col=0,
+    )
     column_names = df.columns
     assert list(column_names[0:4]) == [
         "AC-1: Part a",

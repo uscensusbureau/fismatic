@@ -1,10 +1,9 @@
+import os.path
 from .docx_parser import DocxParser
 from . import similarity
 
 
-def run(target_doc):
-    parser = DocxParser(target_doc)
-    control_set = parser.get_control_set()
+def report(outfile, control_set):
     implementations_by_id = control_set.get_implementations_by_id()
 
     num_controls = control_set.num_controls()
@@ -23,7 +22,17 @@ def run(target_doc):
     )
 
     diffs = similarity.generate_diffs_with_labels(implementations_by_id)
-    similarity.write_matrix(diffs)
+    similarity.write_matrix(diffs, filename=outfile)
 
     very_similar = similarity.similar_controls(diffs)
     similarity.print_similarity(very_similar)
+
+
+def run(target_doc):
+    parser = DocxParser(target_doc)
+    control_set = parser.get_control_set()
+
+    os.makedirs("out", exist_ok=True)
+    outfile = os.path.join("out", target_doc.replace(".docx", ".csv"))
+
+    report(outfile, control_set)
