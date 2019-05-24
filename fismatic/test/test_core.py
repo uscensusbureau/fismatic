@@ -1,7 +1,14 @@
 import csv
+import os.path
 import pandas as pd
 from . import common
 from .. import core as fismatic
+
+
+def test_glob_input():
+    fismatic.run("*.docx")
+    outfile = "out/Azure Security and Compliance Blueprint - FedRAMP High SSP.csv"
+    assert os.path.exists(outfile)
 
 
 def test_matrix():

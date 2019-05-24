@@ -25,10 +25,10 @@ Rough script exploring approaches to extract control details from a FedRAMP SSP 
 1. Execute the script from within the virtual environment.
 
    ```sh
-   pipenv run python run.py <path_to.docx>
+   pipenv run python run.py <path>
    ```
 
-Outputs a matrix of difference measures between all control implementation narratives under `out/`.
+The `path` can be a specific file, or a [glob](https://docs.python.org/3/library/glob.html)/directory. Outputs one matrix of difference measures between all control implementation narratives per input file under `out/`.
 
 ## Development
 

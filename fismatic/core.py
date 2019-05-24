@@ -1,4 +1,6 @@
+import glob
 import os.path
+import sys
 from .docx_parser import DocxParser
 from . import similarity
 
@@ -28,11 +30,15 @@ def report(outfile, control_set):
     similarity.print_similarity(very_similar)
 
 
-def run(target_doc):
-    parser = DocxParser(target_doc)
-    control_set = parser.get_control_set()
+def run(input_path):
+    files = glob.glob(input_path)
+    if not files:
+        print("No files found matching the input path.", file=sys.stderr)
 
     os.makedirs("out", exist_ok=True)
-    outfile = os.path.join("out", target_doc.replace(".docx", ".csv"))
-
-    report(outfile, control_set)
+    for input_file in files:
+        print("---------------\nParsing {} ...".format(input_file))
+        parser = DocxParser(input_file)
+        control_set = parser.get_control_set()
+        outfile = os.path.join("out", input_file.replace(".docx", ".csv"))
+        report(outfile, control_set)
