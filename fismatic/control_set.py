@@ -18,23 +18,23 @@ class ControlSet:
 
         return result
 
+    def get_implementations(self):
+        """Returns a list of strings."""
+        return self.get_implementations_by_id().values()
+
     def num_controls(self):
         return len(self._controls)
 
     def num_implementations(self):
-        implementations_by_id = self.get_implementations_by_id()
-        return len(implementations_by_id)
+        return len(self.get_implementations())
 
     def num_unique_implementations(self):
-        implementations_by_id = self.get_implementations_by_id()
-        return len(set(implementations_by_id.values()))
+        return len(set(self.get_implementations()))
 
     def num_identical_implementations(self):
         return self.num_implementations() - self.num_unique_implementations()
 
     def num_words(self):
-        implementations_by_id = self.get_implementations_by_id()
-        return reduce(
-            lambda sum, imp: sum + len(tokenize(imp)), implementations_by_id.values(), 0
-        )
+        implementations = self.get_implementations()
+        return reduce(lambda sum, imp: sum + len(tokenize(imp)), implementations, 0)
 
