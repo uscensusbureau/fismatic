@@ -50,6 +50,6 @@ def print_similarity(very_similar):
     print("Similar controls:")
     for control, similar_to in very_similar.items():
         if similar_to:
-            print("------- {} -------".format(control))
-            keys = list(similar_to.keys())
-            print(", ".join(keys))
+            print(control)
+            for other_control, value in similar_to.items():
+                print("  - {} ({:.0%})".format(other_control, value))
