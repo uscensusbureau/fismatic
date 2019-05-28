@@ -69,11 +69,14 @@ def control_set_stats(input_file):
     }
 
 
+def write_stats(stats):
+    df = pd.DataFrame(stats)
+    outfile = os.path.join(OUT_DIR, "all.csv")
+    df.to_csv(outfile, index=False)
+
+
 def run(input_path):
     files = get_files(input_path)
     os.makedirs(OUT_DIR, exist_ok=True)
 
     stats = [control_set_stats(input_file) for input_file in files]
-    df = pd.DataFrame(stats)
-    outfile = os.path.join(OUT_DIR, "all.csv")
-    df.to_csv(outfile, index=False)
