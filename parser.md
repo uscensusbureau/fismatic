@@ -28,7 +28,7 @@ Rough script exploring approaches to extract control details from a FedRAMP SSP 
    pipenv run python run.py <path>
    ```
 
-The `path` can be a specific file, or a directory. Outputs one matrix of difference measures between all control implementation narratives per input file under `out/`.
+The `path` can be a specific file, or a directory. Outputs one matrix of difference measures between all control implementation narratives per input file under `out/`, as well as per-file stats at `out/all.csv`.
 
 ## Development
 

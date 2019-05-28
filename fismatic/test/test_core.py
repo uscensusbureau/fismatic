@@ -24,7 +24,7 @@ def test_get_files(test_input, expected):
     assert result == expected
 
 
-def test_matrix():
+def test_file_matrix():
     fismatic.run(common.SOURCE_DOC)
 
     df = pd.read_csv(
@@ -41,3 +41,10 @@ def test_matrix():
     # check that the columns match the rows
     row_names = df.index
     assert list(column_names) == list(row_names)
+
+
+def test_all_stats():
+    fismatic.run(common.SOURCE_DOC)
+
+    df = pd.read_csv("out/all.csv")
+    assert df["Filename"][0] == common.SOURCE_DOC
