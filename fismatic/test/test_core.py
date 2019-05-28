@@ -47,4 +47,6 @@ def test_all_stats():
     fismatic.run(common.SOURCE_DOC)
 
     df = pd.read_csv("out/all.csv")
-    assert df["Filename"][0] == common.SOURCE_DOC
+    result = os.path.abspath(df["Filename"][0])
+    expected = os.path.abspath(common.SOURCE_DOC)
+    assert result == expected
