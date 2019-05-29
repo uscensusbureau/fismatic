@@ -34,7 +34,10 @@ class ControlSet:
     def num_identical_implementations(self):
         return self.num_implementations() - self.num_unique_implementations()
 
-    def num_words(self):
+    def implementation_word_counts(self):
         implementations = self.get_implementations()
-        return reduce(lambda sum, imp: sum + len(tokenize(imp)), implementations, 0)
+        return [len(tokenize(imp)) for imp in implementations]
+
+    def num_words(self):
+        return sum(self.implementation_word_counts())
 
