@@ -1,6 +1,7 @@
 name: fismatic
 dependencies:
   - python=3
+  - jupyter
   - nltk
   - pandas
   - pip

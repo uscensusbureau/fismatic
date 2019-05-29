@@ -45,20 +45,23 @@ def get_files(input_path):
         return [input_path]
 
 
+def control_set_for(input_file):
+    parser = DocxParser(input_file)
+    return parser.get_control_set()
+
+
 def process_file(input_file):
     """Returns the ControlSet."""
 
     print("---------------\nParsing {} ...".format(input_file))
-    parser = DocxParser(input_file)
-    control_set = parser.get_control_set()
+    control_set = control_set_for(input_file)
     outfile = os.path.join(OUT_DIR, input_file.replace(".docx", ".csv"))
 
     report(outfile, control_set)
     return control_set
 
 
-def control_set_stats(input_file):
-    control_set = process_file(input_file)
+def stats_for(input_file, control_set):
     return {
         "Filename": input_file,
         "# controls": control_set.num_controls(),
@@ -69,10 +72,16 @@ def control_set_stats(input_file):
     }
 
 
+def control_set_stats(input_file):
+    control_set = process_file(input_file)
+    return stats_for(input_file, control_set)
+
+
 def write_stats(stats):
     df = pd.DataFrame(stats)
+    df.set_index("Filename", inplace=True)
     outfile = os.path.join(OUT_DIR, "all.csv")
-    df.to_csv(outfile, index=False)
+    df.to_csv(outfile)
 
 
 def run(input_path):
@@ -80,3 +89,4 @@ def run(input_path):
     os.makedirs(OUT_DIR, exist_ok=True)
 
     stats = [control_set_stats(input_file) for input_file in files]
+    write_stats(stats)
