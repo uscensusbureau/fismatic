@@ -4,18 +4,12 @@ Rough script exploring approaches to extract control details from a FedRAMP SSP 
 
 ## Setup
 
-1. Install Python 3.
-1. Install [Pipenv](https://docs.pipenv.org/en/latest/).
-1. Install Python packages.
+1. [Install Conda.](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html)
+1. Set up Conda environment.
 
    ```sh
-   pipenv install
-   ```
-
-1. Download the tokenizer.
-
-   ```sh
-   python -c 'import nltk; nltk.download("punkt")'
+   conda env create -f environment.yml
+   conda activate fismatic
    ```
 
 ## Running
@@ -25,7 +19,7 @@ Rough script exploring approaches to extract control details from a FedRAMP SSP 
 1. Execute the script from within the virtual environment.
 
    ```sh
-   pipenv run python run.py <path>
+   python run.py <path>
    ```
 
 The `path` can be a specific file, or a directory. Outputs one matrix of difference measures between all control implementation narratives per input file under `out/`, as well as per-file stats at `out/all.csv`.

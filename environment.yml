@@ -1,0 +1,13 @@
+name: fismatic
+dependencies:
+  - python=3
+  - nltk
+  - pandas
+  - pip
+  - pip:
+      - autoflake
+      - black
+      - python-docx
+  - pytest
+  - rope
+  - scikit-learn
