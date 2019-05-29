@@ -29,14 +29,10 @@ The `path` can be a specific file, or a directory. Outputs one matrix of differe
 To start the Jupyter Notebook:
 
 ```sh
-jupyter notebook
+jupyter notebook --config=jupyter_notebook_config.py
 ```
 
-then open [`analysis.ipynb`](http://localhost:8888/notebooks/analysis.ipynb). Before committing, remove the outputs (and thus any potential sensitive information) using:
-
-```sh
-jupyter nbconvert --ClearOutputPreprocessor.enabled=True --inplace *.ipynb
-```
+then open [`analysis.ipynb`](http://localhost:8888/notebooks/analysis.ipynb).
 
 ## Development
 
