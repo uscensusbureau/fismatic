@@ -22,23 +22,13 @@ Rough script exploring approaches to extract control details from a FedRAMP SSP 
 
 1. Download an SSP as a `.docx` based on the [FedRAMP template](https://www.fedramp.gov/templates/).
    - The [Azure Blueprint FedRAMP High SSP](https://www.microsoft.com/en-us/trustcenter/compliance/fedramp) is a good one to test with.
-1. Execute the script from within the virtual environment.
+1. Start the Jupyter Notebook.
 
    ```sh
-   python run.py <path>
+   jupyter notebook --config=jupyter_notebook_config.py
    ```
 
-The `path` can be a specific file, or a directory. Outputs one matrix of difference measures between all control implementation narratives per input file under `out/`.
-
-## Notebook
-
-To start the Jupyter Notebook:
-
-```sh
-jupyter notebook --config=jupyter_notebook_config.py
-```
-
-then open [`analysis.ipynb`](http://localhost:8888/notebooks/analysis.ipynb).
+1. Open [`analysis.ipynb`](http://localhost:8888/notebooks/analysis.ipynb).
 
 ## Development
 
