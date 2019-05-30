@@ -9,6 +9,7 @@ dependencies:
       - autoflake
       - black
       - python-docx
+  - plotly
   - pytest
   - rope
   - scikit-learn
