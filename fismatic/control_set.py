@@ -33,10 +33,15 @@ class ControlSet:
     def num_identical_implementations(self):
         return self.num_implementations() - self.num_unique_implementations()
 
-    def implementation_word_counts(self):
+    def implementation_token_counts(self):
         implementations = self.get_implementations()
-        return [len(nlp(imp)) for imp in implementations]
+        return [
+            # based on
+            # https://stackoverflow.com/a/41425016/358804
+            sum(1 if not (token.is_stop or token.is_punct) else 0 for token in nlp(imp))
+            for imp in implementations
+        ]
 
-    def num_words(self):
-        return sum(self.implementation_word_counts())
+    def num_tokens(self):
+        return sum(self.implementation_token_counts())
 
