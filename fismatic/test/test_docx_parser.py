@@ -17,5 +17,5 @@ def test_implementation():
 
     control = controls["AC-1"]
     implementation = control.implementation["Part a"]
-    assert "Microsoft Azure" in implementation
-    assert "customer is responsible" in implementation
+    assert "Microsoft Azure" in implementation.text
+    assert "customer is responsible" in implementation.text

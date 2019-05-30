@@ -5,7 +5,9 @@ from .. import similarity
 
 
 def test_generate_diffs():
-    diffs = similarity.generate_diffs(["foo", "Foo", "bar"])
+    sources = ["foo", "Foo", "bar"]
+    docs = [similarity.nlp(source) for source in sources]
+    diffs = similarity.generate_diffs(docs)
     expected = [
         # foo, Foo, bar
         [1.0, 1.0, 0.2],  # foo

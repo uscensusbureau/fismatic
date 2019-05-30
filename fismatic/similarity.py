@@ -6,18 +6,17 @@ import spacy
 nlp = spacy.load("en_core_web_lg")
 
 
-def generate_diffs(all_desc):
-    """Returns the similarity scores between controls."""
-    docs = [nlp(imp) for imp in all_desc]
+def generate_diffs(docs):
+    """Expects an iterable of spaCy Docs. Returns the similarity scores between controls."""
     results = [[doc1.similarity(doc2) for doc2 in docs] for doc1 in docs]
     return np.array(results)
 
 
 def generate_diffs_with_labels(implementations_by_id):
     """Returns a Pandas DataFrame of the similarity scores between controls."""
-    all_desc = implementations_by_id.values()
+    implementations = implementations_by_id.values()
     desc_lkup = implementations_by_id.keys()
-    matrix = generate_diffs(all_desc)
+    matrix = generate_diffs(implementations)
     return pd.DataFrame(matrix, index=desc_lkup, columns=desc_lkup)
 
 

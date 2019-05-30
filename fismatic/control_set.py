@@ -1,6 +1,3 @@
-from .similarity import nlp
-
-
 class ControlSet:
     def __init__(self, controls):
         self._controls = controls
@@ -10,10 +7,9 @@ class ControlSet:
         result = {}
 
         for control in self._controls:
-            for part, txt in control.implementation.items():
+            for part, imp in control.implementation.items():
                 key = ": ".join([control.name, part])
-                val = txt.strip().lower()
-                result[key] = val
+                result[key] = imp
 
         return result
 
@@ -38,7 +34,7 @@ class ControlSet:
         return [
             # based on
             # https://stackoverflow.com/a/41425016/358804
-            sum(1 if not (token.is_stop or token.is_punct) else 0 for token in nlp(imp))
+            sum(1 if not (token.is_stop or token.is_punct) else 0 for token in imp)
             for imp in implementations
         ]
 

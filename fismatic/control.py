@@ -1,4 +1,5 @@
 import re
+from .similarity import nlp
 
 
 class Control:
@@ -9,6 +10,14 @@ class Control:
         self.imp_status = None
         self.origination = None
         self.implementation = {}
+
+    @property
+    def implementation(self):
+        return self._implementation
+
+    @implementation.setter
+    def implementation(self, value):
+        self._implementation = {part: nlp(imp) for part, imp in value.items()}
 
     def normalized_name(self):
         # remove any spaces
