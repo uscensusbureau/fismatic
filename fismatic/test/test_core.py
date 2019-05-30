@@ -40,12 +40,3 @@ def test_file_matrix():
     # check that the columns match the rows
     row_names = df.index
     assert list(column_names) == list(row_names)
-
-
-def test_all_stats():
-    fismatic.run(common.SOURCE_DOC)
-
-    df = pd.read_csv("out/all.csv")
-    result = os.path.abspath(df["Filename"][0])
-    expected = os.path.abspath(common.SOURCE_DOC)
-    assert result == expected
