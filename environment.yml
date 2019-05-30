@@ -1,6 +1,7 @@
 name: fismatic
 dependencies:
   - python=3
+  - jupyter
   - nltk
   - pandas
   - pip
@@ -8,6 +9,7 @@ dependencies:
       - autoflake
       - black
       - python-docx
+  - plotly
   - pytest
   - rope
   - scikit-learn

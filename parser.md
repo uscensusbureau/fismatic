@@ -24,6 +24,16 @@ Rough script exploring approaches to extract control details from a FedRAMP SSP 
 
 The `path` can be a specific file, or a directory. Outputs one matrix of difference measures between all control implementation narratives per input file under `out/`, as well as per-file stats at `out/all.csv`.
 
+## Notebook
+
+To start the Jupyter Notebook:
+
+```sh
+jupyter notebook --config=jupyter_notebook_config.py
+```
+
+then open [`analysis.ipynb`](http://localhost:8888/notebooks/analysis.ipynb).
+
 ## Development
 
 To run tests:

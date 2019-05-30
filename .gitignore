@@ -8,3 +8,4 @@ output.json
 .DS_Store
 matrix.csv
 out/
+.ipynb_checkpoints/
