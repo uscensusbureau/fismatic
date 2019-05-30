@@ -21,9 +21,9 @@ def test_similar_controls():
     diffs = pd.DataFrame(
         [
             # AC-1, AC-2, AC-2 (1)
-            [1.0, 0.9, 0.0],  # AC-1
-            [0.9, 1.0, 0.0],  # AC-2
-            [0.0, 0.0, 1.0],  # AC-2 (1)
+            [1.00, 0.95, 0.00],  # AC-1
+            [0.95, 1.00, 0.00],  # AC-2
+            [0.00, 0.00, 1.00],  # AC-2 (1)
         ],
         index=desc_lkup,
         columns=desc_lkup,
@@ -31,7 +31,7 @@ def test_similar_controls():
 
     very_similar = similarity.similar_controls(diffs)
     assert very_similar == {
-        "AC-1": {"AC-2": 0.9},
-        "AC-2": {"AC-1": 0.9},
+        "AC-1": {"AC-2": 0.95},
+        "AC-2": {"AC-1": 0.95},
         "AC-2 (1)": {},
     }
