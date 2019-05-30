@@ -29,17 +29,3 @@ def similar_controls(diffs, threshold=0.9):
         control_name: similarities[similarities > threshold].to_dict()
         for control_name, similarities in diffs.iteritems()
     }
-
-
-def write_matrix(diffs, filename="matrix.csv"):
-    # https://stackoverflow.com/a/11146434/358804
-    diffs.to_csv(filename, index=True, header=True)
-
-
-def print_similarity(very_similar):
-    print("Similar controls:")
-    for control, similar_to in very_similar.items():
-        if similar_to:
-            print(control)
-            for other_control, value in similar_to.items():
-                print("  - {} ({:.0%})".format(other_control, value))
