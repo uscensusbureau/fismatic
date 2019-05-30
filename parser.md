@@ -12,6 +12,12 @@ Rough script exploring approaches to extract control details from a FedRAMP SSP 
    conda activate fismatic
    ```
 
+1. Download the language model.
+
+   ```sh
+   python -m spacy download en_core_web_lg
+   ```
+
 ## Running
 
 1. Download an SSP as a `.docx` based on the [FedRAMP template](https://www.fedramp.gov/templates/).

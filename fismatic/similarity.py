@@ -1,24 +1,16 @@
-import string
 import numpy as np
-from nltk.tokenize import word_tokenize
 import pandas as pd
-from sklearn.feature_extraction.text import TfidfVectorizer
+import spacy
 
 
-def tokenize(text):
-    """Returns an array of tokenized terms."""
-    return [w.lower() for w in word_tokenize(text) if w not in string.punctuation]
-
-
-TfidfVec = TfidfVectorizer(tokenizer=tokenize)
+nlp = spacy.load("en_core_web_lg")
 
 
 def generate_diffs(all_desc):
     """Returns the similarity scores between controls."""
-    # Part f of
-    # https://sites.temple.edu/tudsc/2017/03/30/measuring-similarity-between-texts-in-python/
-    tfidf = TfidfVec.fit_transform(all_desc)
-    return (tfidf * tfidf.T).toarray()
+    docs = [nlp(imp) for imp in all_desc]
+    results = [[doc1.similarity(doc2) for doc2 in docs] for doc1 in docs]
+    return np.array(results)
 
 
 def generate_diffs_with_labels(implementations_by_id):

@@ -1,4 +1,4 @@
-from .similarity import tokenize
+from .similarity import nlp
 
 
 class ControlSet:
@@ -35,7 +35,7 @@ class ControlSet:
 
     def implementation_word_counts(self):
         implementations = self.get_implementations()
-        return [len(tokenize(imp)) for imp in implementations]
+        return [len(nlp(imp)) for imp in implementations]
 
     def num_words(self):
         return sum(self.implementation_word_counts())
