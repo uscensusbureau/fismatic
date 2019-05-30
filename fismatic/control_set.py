@@ -1,3 +1,5 @@
+from collections import Counter
+from . import helpers
 from . import similarity
 
 
@@ -47,4 +49,20 @@ class ControlSet:
     def similarity_matrix(self):
         implementations_by_id = self.get_implementations_by_id()
         return similarity.generate_diffs_with_labels(implementations_by_id)
+
+    def all_tokens(self):
+        """Returns a list of spaCy tokens."""
+        implementations = self.get_implementations()
+        return helpers.flatten(implementations)
+
+    def proper_nouns(self):
+        tokens = self.all_tokens()
+        return [token.text for token in tokens if token.pos_ == "PROPN"]
+
+    def top_proper_nouns(self, top=20):
+        """Returns the most common proper nouns across the controls."""
+        p_nouns = self.proper_nouns()
+        # https://www.youtube.com/watch?v=YrFOAhT4Azk
+        counter = Counter(p_nouns)
+        return counter.most_common(top)
 
