@@ -50,19 +50,15 @@ class ControlSet:
         implementations_by_id = self.get_implementations_by_id()
         return similarity.generate_diffs_with_labels(implementations_by_id)
 
-    def all_tokens(self):
-        """Returns a list of spaCy tokens."""
+    def entities(self):
+        """Returns a list of spaCy Entities."""
         implementations = self.get_implementations()
-        return helpers.flatten(implementations)
+        return helpers.flatten(imp.ents for imp in implementations)
 
-    def proper_nouns(self):
-        tokens = self.all_tokens()
-        return [token.text for token in tokens if token.pos_ == "PROPN"]
-
-    def top_proper_nouns(self, top=20):
-        """Returns the most common proper nouns across the controls."""
-        p_nouns = self.proper_nouns()
+    def top_entities(self, top=20):
+        """Returns the most common entities across the controls."""
+        entities = [e.text for e in self.entities()]
         # https://www.youtube.com/watch?v=YrFOAhT4Azk
-        counter = Counter(p_nouns)
+        counter = Counter(entities)
         return counter.most_common(top)
 

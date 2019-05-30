@@ -13,20 +13,16 @@ def test_num_tokens():
     assert control_set.num_tokens() == 9
 
 
-def test_all_tokens():
+def test_top_entities():
     control1 = Control("foo")
-    control1.implementation = {"A": "foo - does things"}
+    control1.implementation = {
+        "A": "FISMATic is the greatest thing to happen to the United States since sliced bread."
+    }
 
     control2 = Control("bar")
-    control2.implementation = {"A": "bar's a thinger do-er"}
+    control2.implementation = {"A": "Have I told you how great FISMAtic is?"}
 
     control_set = ControlSet([control1, control2])
-    assert control_set.all_tokens() == [
-        "foo",
-        "does",
-        "things",
-        "bar",
-        "a",
-        "thinger",
-        "do-er",
-    ]
+
+    # TODO this should have captured "FISMAtic"
+    assert control_set.top_entities() == [("the United States", 1)]
