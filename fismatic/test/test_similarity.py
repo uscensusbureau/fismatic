@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 from pytest import approx
 from .. import similarity
@@ -5,12 +6,13 @@ from .. import similarity
 
 def test_generate_diffs():
     diffs = similarity.generate_diffs(["foo", "Foo", "bar"])
-    assert approx(diffs) == [
+    expected = [
         # foo, Foo, bar
-        [1.0, 1.0, 0.0],  # foo
-        [1.0, 1.0, 0.0],  # Foo
-        [0.0, 0.0, 1.0],  # bar
+        [1.0, 1.0, 0.2],  # foo
+        [1.0, 1.0, 0.2],  # Foo
+        [0.2, 0.2, 1.0],  # bar
     ]
+    np.testing.assert_array_almost_equal(diffs, expected, decimal=2)
 
 
 def test_similar_controls():

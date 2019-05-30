@@ -2,7 +2,6 @@ name: fismatic
 dependencies:
   - python=3
   - jupyter
-  - nltk
   - pandas
   - pip
   - pip:
@@ -13,3 +12,4 @@ dependencies:
   - pytest
   - rope
   - scikit-learn
+  - spacy

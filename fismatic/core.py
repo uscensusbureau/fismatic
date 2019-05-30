@@ -13,7 +13,7 @@ def report(outfile, control_set):
     num_controls = control_set.num_controls()
     num_implementations = control_set.num_implementations()
     print("Parsed {} controls".format(num_controls))
-    print("{} total words in the controls.".format(control_set.num_words()))
+    print("{} total tokens in the controls.".format(control_set.num_tokens()))
     print(
         "Comparing {} narratives from {} controls".format(
             num_implementations, num_controls
@@ -66,7 +66,7 @@ def stats_for(input_file, control_set):
         "# identical implementations": control_set.num_identical_implementations(),
         "# implementations": control_set.num_implementations(),
         "# unique implementations": control_set.num_unique_implementations(),
-        "# words": control_set.num_words(),
+        "# tokens": control_set.num_tokens(),
     }
 
 
