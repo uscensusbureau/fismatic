@@ -20,7 +20,7 @@ def generate_diffs_with_labels(implementations_by_id):
     return pd.DataFrame(matrix, index=desc_lkup, columns=desc_lkup)
 
 
-def similar_controls(diffs, threshold=0.8):
+def similar_controls(diffs, threshold=0.9):
     """Find all control narratives which are identical or very similar (greater than the provided number)."""
     # exclude the controls matching themselves
     np.fill_diagonal(diffs.values, np.nan)

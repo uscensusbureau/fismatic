@@ -1,3 +1,6 @@
+from . import similarity
+
+
 class ControlSet:
     def __init__(self, controls):
         self._controls = controls
@@ -40,4 +43,8 @@ class ControlSet:
 
     def num_tokens(self):
         return sum(self.implementation_token_counts())
+
+    def similarity_matrix(self):
+        implementations_by_id = self.get_implementations_by_id()
+        return similarity.generate_diffs_with_labels(implementations_by_id)
 
