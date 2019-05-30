@@ -1,4 +1,3 @@
-from functools import reduce
 from .similarity import tokenize
 
 

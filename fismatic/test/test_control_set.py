@@ -1,4 +1,3 @@
-from . import common
 from ..control import Control
 from ..control_set import ControlSet
 

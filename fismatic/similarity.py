@@ -1,6 +1,5 @@
 import string
 import numpy as np
-import nltk
 from nltk.tokenize import word_tokenize
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
