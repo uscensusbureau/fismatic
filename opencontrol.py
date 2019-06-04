@@ -1,5 +1,8 @@
 from github import Github
 import os
+import requests_cache
+
+requests_cache.install_cache("requests_cache")
 
 token = os.getenv("GITHUB_TOKEN")
 g = Github(token)

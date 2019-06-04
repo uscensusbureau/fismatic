@@ -9,6 +9,7 @@ dependencies:
       - black
       - PyGithub
       - python-docx
+      - requests-cache
   - plotly
   - pytest
   - rope

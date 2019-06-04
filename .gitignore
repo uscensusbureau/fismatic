@@ -9,3 +9,4 @@ output.json
 matrix.csv
 out/
 .ipynb_checkpoints/
+*.sqlite
