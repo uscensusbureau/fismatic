@@ -1,3 +1,4 @@
+import compliancelib
 from github import Github, RateLimitExceededException
 import os
 import requests_cache
@@ -8,32 +9,7 @@ requests_cache.install_cache("requests_cache")
 token = os.getenv("GITHUB_TOKEN")
 g = Github(token)
 
-# The GitHub code search API requires one or more org/user to be specified.
-# https://developer.github.com/changes/2013-10-18-new-code-search-requirements/#new-validation-rule
-# The following is a curated list. To find more, go to:
-# https://github.com/search?utf8=%E2%9C%93&q=schema_version+satisfies+control_key+language%3Ayaml&type=Code
-users = [
-    "18F",
-    "ComplianceAsCode",
-    "corbaltcode",
-    "docker",
-    "GovReady",
-    "GSA",
-    "jenglish",
-    "jmmcnj",
-    "m3brown",
-    "madhugilla",
-    "nsagoo-pivotal",
-    "opencontrol",
-    "redhatrises",
-    "SecurityCentral",
-    "shawndwells",
-    "superbrilliant",
-    "weirdscience",
-]
-users_q = " ".join("user:{}".format(user) for user in users)
-results = g.search_code("schema_version satisfies control_key language:yaml " + users_q)
-
+results = g.search_code("path:/ filename:opencontrol.yaml components")
 # get as many as we can before hitting the rate limit
 repos = set()
 try:
@@ -45,3 +21,23 @@ except RateLimitExceededException as err:
 sorted_repos = list(repos)
 sorted_repos.sort()
 print(sorted_repos)
+
+systems = []
+for result in results:
+    print(result.path)
+    print(result.repository.html_url)
+
+    sp = compliancelib.SystemCompliance()
+    try:
+        sp.load_system_from_opencontrol_repo(result.repository.html_url)
+    except Exception as err:
+        print(
+            "Failed to import {}.".format(result.repository.full_name),
+            err,
+            file=sys.stderr,
+        )
+        continue
+
+    systems.append(sp)
+
+print(len(systems))
