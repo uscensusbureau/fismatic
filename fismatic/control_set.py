@@ -62,3 +62,21 @@ class ControlSet:
         counter = Counter(entities)
         return counter.most_common(top)
 
+    def proper_noun_chunks(self):
+        implementations = self.get_implementations()
+        return helpers.flatten(
+            [
+                [
+                    chunk.text
+                    for chunk in imp.noun_chunks
+                    if chunk.root.tag_ in ["NNP", "NNPS"]
+                ]
+                for imp in implementations
+            ]
+        )
+
+    def top_proper_noun_chunks(self, top=20):
+        """Returns the most common proper noun chunks across the controls."""
+        chunks = self.proper_noun_chunks()
+        counter = Counter(chunks)
+        return counter.most_common(top)

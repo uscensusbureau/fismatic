@@ -26,3 +26,18 @@ def test_top_entities():
 
     # TODO this should have captured "FISMAtic"
     assert control_set.top_entities() == [("the United States", 1)]
+
+
+def test_top_proper_noun_chunks():
+    control1 = Control("foo")
+    control1.implementation = {
+        "A": "FISMATic is the greatest thing to happen to the United States since sliced bread."
+    }
+
+    control2 = Control("bar")
+    control2.implementation = {"A": "Have I told you how great FISMAtic is?"}
+
+    control_set = ControlSet([control1, control2])
+
+    # TODO this should have captured "FISMAtic"
+    assert control_set.top_proper_noun_chunks() == [("the United States", 1)]
