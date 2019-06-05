@@ -25,21 +25,19 @@ def opencontrol_system(file_result):
 
 
 def opencontrol_systems(github_client):
+    """A generator that yields instances of compliancelib.SystemCompliance()."""
     results = opencontrol_files(github_client)
-    systems = []
     for result in results:
         print(result.path)
         print(result.repository.html_url)
 
         system = opencontrol_system(result)
         if system:
-            systems.append(system)
-
-    return systems
+            yield system
 
 
 if __name__ == "__main__":
     token = os.getenv("GITHUB_TOKEN")
     g = Github(token)
     systems = opencontrol_systems(g)
-    print(len(systems))
+    print(len(list(systems)))
