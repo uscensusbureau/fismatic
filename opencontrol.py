@@ -6,38 +6,40 @@ import sys
 
 requests_cache.install_cache("requests_cache")
 
-token = os.getenv("GITHUB_TOKEN")
-g = Github(token)
 
-results = g.search_code("path:/ filename:opencontrol.yaml components")
-# get as many as we can before hitting the rate limit
-repos = set()
-try:
-    for result in results:
-        repos.add(result.repository.full_name)
-except RateLimitExceededException as err:
-    print(err, file=sys.stderr)
+def opencontrol_files(github_client):
+    # only pull in top-level opencontrol.yaml files for now, for simplicity
+    return github_client.search_code("path:/ filename:opencontrol.yaml components")
 
-sorted_repos = list(repos)
-sorted_repos.sort()
-print(sorted_repos)
 
-systems = []
-for result in results:
-    print(result.path)
-    print(result.repository.html_url)
-
+def opencontrol_system(file_result):
     sp = compliancelib.SystemCompliance()
+    repo = file_result.repository
     try:
-        sp.load_system_from_opencontrol_repo(result.repository.html_url)
+        sp.load_system_from_opencontrol_repo(repo.html_url)
     except Exception as err:
-        print(
-            "Failed to import {}.".format(result.repository.full_name),
-            err,
-            file=sys.stderr,
-        )
-        continue
+        print("Failed to import {}.".format(repo.full_name), file=sys.stderr)
+        return None
 
-    systems.append(sp)
+    return sp
 
-print(len(systems))
+
+def opencontrol_systems(github_client):
+    results = opencontrol_files(github_client)
+    systems = []
+    for result in results:
+        print(result.path)
+        print(result.repository.html_url)
+
+        system = opencontrol_system(result)
+        if system:
+            systems.append(system)
+
+    return systems
+
+
+if __name__ == "__main__":
+    token = os.getenv("GITHUB_TOKEN")
+    g = Github(token)
+    systems = opencontrol_systems(g)
+    print(len(systems))
