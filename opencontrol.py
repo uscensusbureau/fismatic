@@ -18,28 +18,20 @@ def system_for(url):
     sp = compliancelib.SystemCompliance()
     try:
         sp.load_system_from_opencontrol_repo(url)
-    except Exception as err:
-        print("Failed to import {}.".format(url), file=sys.stderr)
+    except Exception:
         return None
 
     return sp
 
 
-def opencontrol_system(file_result):
-    url = file_result.repository.html_url
-    return system_for(url)
-
-
-def opencontrol_systems(github_client):
-    """A generator that yields instances of compliancelib.SystemCompliance."""
+def opencontrol_urls(github_client):
+    """A generator that yields strings of repository URLs."""
     results = opencontrol_files(github_client)
     for result in results:
         print(result.path)
         print(result.repository.html_url)
 
-        system = opencontrol_system(result)
-        if system:
-            yield system
+        yield result.repository.html_url
 
 
 def controls_for(system):
@@ -63,17 +55,26 @@ def cl_to_fm_controls(cl_controls):
         yield fm_control
 
 
+def process_url(url):
+    system = system_for(url)
+    if not system:
+        print("Failed to import {}.".format(url), file=sys.stderr)
+        return
+
+    cl_controls = controls_for(system)
+    fm_controls = cl_to_fm_controls(cl_controls)
+    control_set = ControlSet(fm_controls)
+    print(control_set.top_entities())
+
+
 if __name__ == "__main__":
     token = os.getenv("GITHUB_TOKEN")
     g = Github(token)
 
     if len(sys.argv) > 1:
-        systems = [system_for(url) for url in sys.argv[1:]]
+        repo_urls = sys.argv[1:]
     else:
-        systems = opencontrol_systems(g)
+        repo_urls = opencontrol_urls(g)
 
-    for system in systems:
-        cl_controls = controls_for(system)
-        fm_controls = cl_to_fm_controls(cl_controls)
-        control_set = ControlSet(fm_controls)
-        print(control_set.top_entities())
+    for url in repo_urls:
+        process_url(url)
