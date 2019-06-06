@@ -14,16 +14,20 @@ def opencontrol_files(github_client):
     return github_client.search_code("path:/ filename:opencontrol.yaml components")
 
 
-def opencontrol_system(file_result):
+def system_for(url):
     sp = compliancelib.SystemCompliance()
-    repo = file_result.repository
     try:
-        sp.load_system_from_opencontrol_repo(repo.html_url)
+        sp.load_system_from_opencontrol_repo(url)
     except Exception as err:
-        print("Failed to import {}.".format(repo.full_name), file=sys.stderr)
+        print("Failed to import {}.".format(url), file=sys.stderr)
         return None
 
     return sp
+
+
+def opencontrol_system(file_result):
+    url = file_result.repository.html_url
+    return system_for(url)
 
 
 def opencontrol_systems(github_client):
@@ -63,7 +67,11 @@ if __name__ == "__main__":
     token = os.getenv("GITHUB_TOKEN")
     g = Github(token)
 
-    systems = opencontrol_systems(g)
+    if len(sys.argv) > 1:
+        systems = [system_for(url) for url in sys.argv[1:]]
+    else:
+        systems = opencontrol_systems(g)
+
     for system in systems:
         cl_controls = controls_for(system)
         fm_controls = cl_to_fm_controls(cl_controls)
