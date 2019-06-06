@@ -1,7 +1,7 @@
 import compliancelib
 from fismatic.control import Control
 from fismatic.control_set import ControlSet
-from github import Github, RateLimitExceededException
+from github import Github
 import os
 import requests_cache
 import sys
