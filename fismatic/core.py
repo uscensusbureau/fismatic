@@ -23,8 +23,9 @@ def control_set_for(input_file):
 
 
 def stats_for(input_file, control_set):
+    filename = os.path.basename(input_file)
     return {
-        "Filename": input_file,
+        "Filename": filename,
         "# controls": control_set.num_controls(),
         "# identical implementations": control_set.num_identical_implementations(),
         "# implementations": control_set.num_implementations(),
