@@ -1,3 +1,5 @@
+<!-- keeping this file at the top level instead of under docs/, since it is being linked to from elsewhere -->
+
 # FISMAtic Research Round One Summary
 
 May 13, 2019
