@@ -3,6 +3,7 @@ from docx.oxml.table import CT_Tbl
 from docx.oxml.text.paragraph import CT_P
 from docx.table import Table, _Cell
 from docx.text.paragraph import Paragraph
+import re
 from .control import Control
 from .similarity import nlp
 
@@ -64,8 +65,9 @@ def get_control_summary(block):
 
 
 def get_responsible_roles(cell):
-    responsible_role = cell.text[len("responsible role:") :].split(",")
-    return [role.strip() for role in responsible_role]
+    roles_str = re.sub("responsible role:", "", cell.text, flags=re.IGNORECASE)
+    responsible_roles = roles_str.split(",")
+    return [role.strip() for role in responsible_roles]
 
 
 def parse_control_table(table):
@@ -77,13 +79,13 @@ def parse_control_table(table):
     result = {"responsible_role": None, "imp_status": None, "origination": None}
     for row in table.rows[1:]:
         for c in row.cells:
-            text = c.text.strip()
-            if text.lower().startswith("responsible role:"):
+            text = c.text.strip().lower()
+            if text.startswith("responsible role:"):
                 result["responsible_role"] = get_responsible_roles(c)
-            elif text.startswith("Implementation Status"):
+            elif text.startswith("implementation status"):
                 # return which box is checked
                 pass
-            elif text.startswith("Control Origination"):
+            elif text.startswith("control origination"):
                 # return which box is checked
                 pass
             else:
