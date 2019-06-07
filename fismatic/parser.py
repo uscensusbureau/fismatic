@@ -4,6 +4,7 @@ from docx.oxml.text.paragraph import CT_P
 from docx.table import Table, _Cell
 from docx.text.paragraph import Paragraph
 from .control import Control
+from .similarity import nlp
 
 
 def iter_block_items(parent):
@@ -40,20 +41,26 @@ def get_control_summary_for(control="AC-1"):
     """TODO"""
 
 
+def is_control_heading(text):
+    actual = nlp(text)
+    expected = nlp("Control Summary Information")
+    return actual.similarity(expected) > 0.9
+
+
 def get_control_summary(block):
-    """
-    True if table contains control summary information
-    2nd cell in first row of table contains "control summary information"
-    """
+    """True if table contains control summary information."""
     if not isinstance(block, Table):
         return False
     first_row = block.rows[0]
-    try:
-        if first_row.cells[1].text.lower() == "control summary information":
-            return first_row.cells[0].text
+    if len(first_row.cells) < 2:
         return False
-    except IndexError:
-        return False
+
+    second_cell_text = first_row.cells[1].text
+    if is_control_heading(second_cell_text):
+        first_cell_text = first_row.cells[0].text
+        return first_cell_text
+
+    return False
 
 
 def get_responsible_roles(cell):
