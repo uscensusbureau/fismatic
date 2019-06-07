@@ -62,15 +62,15 @@ class ControlSet:
         counter = Counter(entities)
         return counter.most_common(top)
 
+    def _is_proper_noun(self, span):
+        # https://spacy.io/api/annotation#pos-tagging
+        return span.root.tag_ in ["NNP", "NNPS"]
+
     def proper_noun_chunks(self):
         implementations = self.get_implementations()
         return helpers.flatten(
             [
-                [
-                    chunk.text
-                    for chunk in imp.noun_chunks
-                    if chunk.root.tag_ in ["NNP", "NNPS"]
-                ]
+                [chunk.text for chunk in imp.noun_chunks if self._is_proper_noun(chunk)]
                 for imp in implementations
             ]
         )
