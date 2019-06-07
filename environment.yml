@@ -1,15 +1,14 @@
 name: fismatic
 dependencies:
-  - python=3
+  - python>=3.5,<4
   - jupyter
   - pandas
   - pip
   - pip:
       - autoflake
       - black
-      - python-docx
-  - plotly
+      - python-docx>0.8,<1
+  - plotly=3
   - pytest
   - rope
-  - scikit-learn
-  - spacy
+  - spacy=2
