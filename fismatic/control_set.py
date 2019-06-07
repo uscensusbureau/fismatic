@@ -80,3 +80,6 @@ class ControlSet:
         chunks = self.proper_noun_chunks()
         counter = Counter(chunks)
         return counter.most_common(top)
+
+    def control_names(self):
+        return [control.normalized_name() for control in self._controls]

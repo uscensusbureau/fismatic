@@ -41,3 +41,13 @@ def test_top_proper_noun_chunks():
 
     # TODO this should have captured "FISMAtic"
     assert control_set.top_proper_noun_chunks() == [("the United States", 1)]
+
+
+def test_control_names():
+    control1 = Control("AC-2")
+    control1.implementation = {"": ""}
+    control2 = Control("AU-6(1)")
+    control2.implementation = {"": ""}
+    control_set = ControlSet([control1, control2])
+
+    assert control_set.control_names() == ["AC-2", "AU-6 (1)"]
