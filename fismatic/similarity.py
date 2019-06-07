@@ -2,8 +2,19 @@ import numpy as np
 import pandas as pd
 import spacy
 
+# lazy-load the model
+# https://stackoverflow.com/a/7152065/358804
+class LazyNLP:
+    def __init__(self):
+        self.nlp = None
 
-nlp = spacy.load("en_core_web_lg")
+    def __call__(self, *args, **kwargs):
+        if not self.nlp:
+            self.nlp = spacy.load("en_core_web_lg")
+        return self.nlp(*args, **kwargs)
+
+
+nlp = LazyNLP()
 
 
 def generate_diffs(docs):
