@@ -9,7 +9,7 @@ def get_files(input_path):
     if os.path.isdir(input_path):
         # only process docx
         pattern = os.path.join(input_path, "**", "*.docx")
-        files = glob.glob(pattern)
+        files = glob.glob(pattern, recursive=True)
         if not files:
             print("No docx files found.", file=sys.stderr)
         return files
