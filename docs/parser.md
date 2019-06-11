@@ -5,17 +5,12 @@ Rough script exploring approaches to extract control details from a FedRAMP SSP 
 ## Setup
 
 1. [Install Conda.](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html)
-1. Set up Conda environment.
+1. Set up Conda environment. From this directory, run:
 
    ```sh
+   conda config --add channels conda-forge
    conda env create -f environment.yml
    conda activate fismatic
-   ```
-
-1. Download the language model.
-
-   ```sh
-   python -m spacy download en_core_web_lg
    ```
 
 ## Running

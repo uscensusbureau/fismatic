@@ -12,3 +12,4 @@ dependencies:
   - pytest
   - rope
   - spacy=2
+  - spacy-model-en_core_web_lg
