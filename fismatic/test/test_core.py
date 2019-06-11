@@ -9,7 +9,7 @@ from .. import core as fismatic
     [
         (common.SOURCE_DOC, [common.SOURCE_DOC]),  # single file
         (".", [common.SOURCE_DOC]),  # directory with docx
-        ("out", []),  # directory without docx
+        ("fismatic", []),  # directory without docx
     ],
 )
 def test_get_files(test_input, expected):
