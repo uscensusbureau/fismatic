@@ -2,6 +2,19 @@ from ..control import Control
 from ..control_set import ControlSet
 
 
+def test_get_implementation_for():
+    control1 = Control("AC-1")
+    control1.implementation = {"A": "foo"}
+
+    control2 = Control("AC-2")
+    control2.implementation = {"A": "bar"}
+
+    control_set = ControlSet([control1, control2])
+    assert control_set.get_implementation_for("AC-2", "A").text == "bar"
+    assert control_set.get_implementation_for("baz", "A") == None
+    assert control_set.get_implementation_for("AC-2", "Z") == None
+
+
 def test_num_tokens():
     control1 = Control("foo")
     control1.implementation = {"A": "foo - does things"}

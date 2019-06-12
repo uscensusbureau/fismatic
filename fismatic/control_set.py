@@ -18,6 +18,18 @@ class ControlSet:
 
         return result
 
+    def get_control(self, name):
+        for control in self._controls:
+            if control.name == name:
+                return control
+        return None
+
+    def get_implementation_for(self, control_name, part):
+        control = self.get_control(control_name)
+        if not control:
+            return None
+        return control.implementation.get(part)
+
     def get_implementations(self):
         """Returns a list of strings."""
         return self.get_implementations_by_id().values()

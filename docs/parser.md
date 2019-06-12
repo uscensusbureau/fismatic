@@ -29,6 +29,7 @@ Rough script exploring approaches to extract control details from a FedRAMP SSP 
    ```
 
 1. Play with the following notebooks:
+   - [`demo.ipynb`](http://localhost:8888/notebooks/demo.ipynb)
    - [`exploration.ipynb`](http://localhost:8888/notebooks/exploration.ipynb)
    - [`analysis.ipynb`](http://localhost:8888/notebooks/analysis.ipynb)
 
