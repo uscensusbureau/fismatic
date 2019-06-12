@@ -28,7 +28,9 @@ Rough script exploring approaches to extract control details from a FedRAMP SSP 
    jupyter notebook --config=jupyter_notebook_config.py
    ```
 
-1. Open [`analysis.ipynb`](http://localhost:8888/notebooks/analysis.ipynb).
+1. Play with the following notebooks:
+   - [`exploration.ipynb`](http://localhost:8888/notebooks/exploration.ipynb)
+   - [`analysis.ipynb`](http://localhost:8888/notebooks/analysis.ipynb)
 
 ## Development
 
