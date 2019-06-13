@@ -1,5 +1,8 @@
 *.docx
 *.doc
+*.xlsx
+*.xls
+
 *.py[cod]
 .vscode
 .0
