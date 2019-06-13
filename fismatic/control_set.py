@@ -41,7 +41,9 @@ class ControlSet:
         return len(self.get_implementations())
 
     def num_unique_implementations(self):
-        return len(set(self.get_implementations()))
+        implementations = self.get_implementations()
+        imp_texts = [imp.text for imp in implementations]
+        return len(set(imp_texts))
 
     def num_identical_implementations(self):
         return self.num_implementations() - self.num_unique_implementations()
