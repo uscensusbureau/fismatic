@@ -9,6 +9,8 @@ The goal of FISMAtic is to reduce the amount of time spent authoring, reviewing,
 - Help compliance teams select security controls that are appropriate to a system (tailored baselines)
   - This can cut out time spent around irrelevant controls in all other steps of the compliance lifecycle
 
+[Interview with Nextgov](https://www.nextgov.com/emerging-tech/2019/05/census-thinks-clippy-style-ai-assistant-could-speed-security-authorizations/157339/)
+
 ## This repository
 
 - [Background information](docs/background.md)
