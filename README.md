@@ -14,3 +14,7 @@ The goal of FISMAtic is to reduce the amount of time spent authoring, reviewing,
 - [Background information](docs/background.md)
 - [Research summary](research.md)
 - [Code information](docs/parser.md)
+
+## Call for collaborators
+
+If you’ve worked in this space or are interested in collaborating, please reach out in an issue or by email. Thanks! alexander.s.cohen@census.gov

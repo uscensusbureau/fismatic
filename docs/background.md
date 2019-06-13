@@ -14,7 +14,3 @@ Security compliance is time consuming (and therefore expensive) for most organiz
 Delivery teams, who may or may not have experience writing System Security Plans (SSPs), spend a lot of time working on the language for security controls. This is then sent to the assessor, who may be pointing out common mistakes. Each of these back-and-forths can take days or weeks, costing staff hours on both sides and stretching out the time before the project can actually deliver value to users.
 
 **Our hypothesis is that we can reduce the time spent on the Select, Implement, and Assess Controls steps of the RMF through tooling.**
-
-## Call for collaborators
-
-If you’ve worked in this space or are interested in collaborating, please reach out in an issue or by email. Thanks! aidan.l.feldman@census.gov
