@@ -1,6 +1,7 @@
 name: fismatic
 dependencies:
   - python>=3.5,<4
+  - ipywidgets
   - jupyter
   - pandas
   - pip
