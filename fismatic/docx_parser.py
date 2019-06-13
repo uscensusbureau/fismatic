@@ -7,7 +7,7 @@ class DocxParser:
     def __init__(self, doc_path):
         self.doc = Document(docx=doc_path)
         controls = self.get_controls().values()
-        self.control_set = ControlSet(controls)
+        self.control_set = ControlSet(controls, source=doc_path)
 
     def get_tables(self):
         return parser.get_tables(self.doc)
@@ -18,5 +18,4 @@ class DocxParser:
         return parser.get_controls(tables)
 
     def get_control_set(self):
-        controls = self.get_controls().values()
-        return ControlSet(controls)
+        return self.control_set

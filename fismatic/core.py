@@ -22,8 +22,8 @@ def control_set_for(input_file):
     return parser.get_control_set()
 
 
-def stats_for(input_file, control_set):
-    filename = os.path.basename(input_file)
+def stats_for(control_set):
+    filename = os.path.basename(control_set.source)
     return {
         "Filename": filename,
         "# controls": control_set.num_controls(),

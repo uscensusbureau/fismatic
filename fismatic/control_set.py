@@ -4,8 +4,14 @@ from . import similarity
 
 
 class ControlSet:
-    def __init__(self, controls):
+    def __init__(self, controls, source=""):
         self._controls = controls
+        self._source = source
+
+    @property
+    def source(self):
+        """Where the control set came from. This will generally be the file path."""
+        return self._source
 
     def get_implementations_by_id(self):
         """The ID (key) is the control name + part."""
