@@ -10,12 +10,13 @@ Rough script exploring approaches to extract control details from a FedRAMP SSP 
    ```sh
    conda env create -f environment.yml
    conda activate fismatic
+   jupyter nbextension enable --py widgetsnbextension
    ```
 
 1. Download the language model.
 
    ```sh
-   python -m spacy download en_core_web_lg
+   python -m spacy download en_core_web_lg --user
    ```
 
 ## Running
