@@ -1,3 +1,4 @@
+from .helpers import present
 from .similarity import nlp
 
 
@@ -7,8 +8,9 @@ def similar_implementations(control_sets, control_name, part, implementation):
     implementations = [
         cs.get_implementation_for(control_name, part) for cs in control_sets
     ]
+
     # exclude SSPs that don't have that control+part
-    implementations = filter(None, implementations)
+    implementations = filter(present, implementations)
 
     # get the most similar
     return sorted(

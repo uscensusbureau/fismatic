@@ -8,6 +8,15 @@ def test_similar_implementations_empty():
     assert results == []
 
 
+def test_similar_implementations_excludes_blank():
+    control = Control("AC-2")
+    control.implementation = {"A": "     "}
+    control_set = ControlSet([control])
+
+    results = similar_implementations([control_set], "AC-2", "A", "foo")
+    assert results == []
+
+
 def test_similar_implementations():
     control1 = Control("AC-1")
     control1.implementation = {"A": "Something else."}
