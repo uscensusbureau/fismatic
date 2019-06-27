@@ -15,6 +15,8 @@ The meat of the project is in Python files under [`fismatic/`](../fismatic), and
 
 How it works: `.docx` files are read from the filesystem into memory as instances of [`ControlSet`s](../fismatic/control_set.py). These could be populated a different way: from a database connection, or [from OpenControl files on GitHub, as this example does](https://github.com/uscensusbureau/fismatic/pull/42). The processing takes place in spaCy/Pandas, and then the results are formatted and displayed in Jupyter.
 
+Project tasks are tracked in [GitHub issues](https://github.com/uscensusbureau/fismatic/issues) and status is reflected in [the Kanban board](https://github.com/uscensusbureau/fismatic/projects/1).
+
 ## Setup
 
 1. [Install Conda.](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html)
