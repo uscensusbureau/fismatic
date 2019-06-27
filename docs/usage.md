@@ -1,4 +1,4 @@
-# Prototype SSP parsing
+# FISMAtic prototype
 
 Rough script exploring approaches to extract control details from a FedRAMP SSP Word document template and analyzing them for similarity of implementation narratives.
 

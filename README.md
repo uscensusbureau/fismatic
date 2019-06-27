@@ -15,7 +15,7 @@ The goal of FISMAtic is to reduce the amount of time spent authoring, reviewing,
 - [Interview with Nextgov](https://www.nextgov.com/emerging-tech/2019/05/census-thinks-clippy-style-ai-assistant-could-speed-security-authorizations/157339/)
 - [Background information](docs/background.md)
 - [Research summary](research.md)
-- [Code information](docs/parser.md)
+- [Code information](docs/usage.md)
 
 ## Call for collaborators
 
