@@ -1,6 +1,19 @@
 # FISMAtic prototype
 
-Rough script exploring approaches to extract control details from a FedRAMP SSP Word document template and analyzing them for similarity of implementation narratives.
+Current state: Jupyter Notebooks that perform linguistic and other analysis of System Security Plans (SSPs) written as Word documents.
+
+## Technical overview
+
+The primary technolgies in use:
+
+- Python - programming language
+- [spaCy](https://spacy.io/) - Natural Language Processing (NLP)
+- [Jupyter Notebooks](https://jupyter.org/) - display of results
+- [Pandas](https://pandas.pydata.org/) - everything quantitative
+
+The meat of the project is in Python files under [`fismatic/`](../fismatic), and is `import`ed into Jupyter Notebooks for display. This code could be leveraged in a web application or as an API instead.
+
+How it works: `.docx` files are read from the filesystem into memory as instances of [`ControlSet`s](../fismatic/control_set.py). These could be populated a different way: from a database connection, or [from OpenControl files on GitHub, as this example does](https://github.com/uscensusbureau/fismatic/pull/42). The processing takes place in spaCy/Pandas, and then the results are formatted and displayed in Jupyter.
 
 ## Setup
 
@@ -30,9 +43,9 @@ Rough script exploring approaches to extract control details from a FedRAMP SSP 
    ```
 
 1. Play with the following notebooks:
-   - [`demo.ipynb`](http://localhost:8888/notebooks/demo.ipynb)
-   - [`exploration.ipynb`](http://localhost:8888/notebooks/exploration.ipynb)
-   - [`analysis.ipynb`](http://localhost:8888/notebooks/analysis.ipynb)
+   - [`exploration.ipynb`](http://localhost:8888/notebooks/exploration.ipynb) - single SSPs
+   - [`analysis.ipynb`](http://localhost:8888/notebooks/analysis.ipynb) - across SSPs
+   - [`demo.ipynb`](http://localhost:8888/notebooks/demo.ipynb) - a proof-of-concept showing relevant control implementations being displayed to the user interactively
 
 ## Development
 
