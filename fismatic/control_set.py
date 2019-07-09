@@ -4,9 +4,10 @@ from . import similarity
 
 
 class ControlSet:
-    def __init__(self, controls, source=""):
-        self._controls = controls
-        self._source = source
+    def __init__(self, ssp, input_file):
+        self.ssp = ssp
+        self._controls = self.ssp.control_list
+        self._source = input_file
 
     @property
     def source(self):
@@ -18,23 +19,22 @@ class ControlSet:
         result = {}
 
         for control in self._controls:
-            for part, imp in control.implementation.items():
-                key = ": ".join([control.name, part])
-                result[key] = imp
-
+            for part in control:
+                if part:
+                    key = control.number + ": " + "Part " + part
+                else:
+                    key = control.number
+                result[key] = control.part(part).text
         return result
 
     def get_control(self, name):
-        for control in self._controls:
-            if control.name == name:
-                return control
-        return None
+        return self.ssp.control(name)
 
     def get_implementation_for(self, control_name, part):
         control = self.get_control(control_name)
         if not control:
             return None
-        return control.implementation.get(part)
+        return control.part(part).text
 
     def get_implementations(self):
         """Returns a list of strings."""
