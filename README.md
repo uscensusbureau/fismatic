@@ -19,4 +19,4 @@ The goal of FISMAtic is to reduce the amount of time spent authoring, reviewing,
 
 ## Call for collaborators
 
-If you’ve worked in this space or are interested in collaborating, please reach out in an issue or by email. Thanks! alexander.s.cohen@census.gov
+If you’ve worked in this space or are interested in collaborating, please reach out in an issue or by email. Thanks! cat@census.gov
