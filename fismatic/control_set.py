@@ -1,44 +1,54 @@
 from collections import Counter
 from . import helpers
 from . import similarity
+from .similarity import nlp
 
 
 class ControlSet:
-    def __init__(self, controls, source=""):
-        self._controls = controls
-        self._source = source
+    def __init__(self, ssp):
+        self.ssp = ssp
+        self._controls = self.ssp.control_list
+        self._source = self.ssp.source
+        self.implementations_by_id = {}
+        self.set_implementations_by_id()
 
     @property
     def source(self):
         """Where the control set came from. This will generally be the file path."""
         return self._source
 
+    @property
     def get_implementations_by_id(self):
+        return self.implementations_by_id
+
+    def set_implementations_by_id(self):
         """The ID (key) is the control name + part."""
         result = {}
 
         for control in self._controls:
-            for part, imp in control.implementation.items():
-                key = ": ".join([control.name, part])
-                result[key] = imp
-
-        return result
+            for part in control:
+                if part:
+                    key = control.number + ": " + "Part " + part
+                else:
+                    key = control.number
+                try:
+                    result[key] = nlp(control.part(part).text)
+                except:
+                    pass
+        self.implementations_by_id = result
 
     def get_control(self, name):
-        for control in self._controls:
-            if control.name == name:
-                return control
-        return None
+        return self.ssp.control(name)
 
     def get_implementation_for(self, control_name, part):
         control = self.get_control(control_name)
         if not control:
             return None
-        return control.implementation.get(part)
+        return control.part(part).text
 
     def get_implementations(self):
         """Returns a list of strings."""
-        return self.get_implementations_by_id().values()
+        return self.get_implementations_by_id.values()
 
     def num_controls(self):
         return len(self._controls)
@@ -67,7 +77,7 @@ class ControlSet:
         return sum(self.implementation_token_counts())
 
     def similarity_matrix(self):
-        implementations_by_id = self.get_implementations_by_id()
+        implementations_by_id = self.get_implementations_by_id
         return similarity.generate_diffs_with_labels(implementations_by_id)
 
     def entities(self):
@@ -102,4 +112,4 @@ class ControlSet:
         return counter.most_common(top)
 
     def control_names(self):
-        return [control.normalized_name() for control in self._controls]
+        return [control.number for control in self._controls]

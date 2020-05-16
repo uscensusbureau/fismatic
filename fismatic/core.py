@@ -1,8 +1,8 @@
 import glob
 import os.path
 import sys
-from .docx_parser import DocxParser
-
+from ssp import SSP
+from .control_set import ControlSet
 
 def get_files(input_path):
     """`input_path` can be a specific file, or a directory."""
@@ -18,8 +18,8 @@ def get_files(input_path):
 
 
 def control_set_for(input_file):
-    parser = DocxParser(input_file)
-    return parser.get_control_set()
+    ssp = SSP(input_file)
+    return ControlSet(ssp)
 
 
 def stats_for(control_set):

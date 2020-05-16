@@ -1,4 +1,5 @@
 *.docx
+!test.docx
 *.doc
 *.xlsx
 *.xls
