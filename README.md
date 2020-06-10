@@ -11,8 +11,8 @@ The goal of FISMAtic is to reduce the amount of time spent authoring, reviewing,
 ## Table of contents
 - [Background information](docs/background.md)
 - [Research summary](research.md)
-- [Proof of Concept 1](https://census.webex.com/census/ldr.php?RCID=9486aa77f0aeb069cd681c9ad6a5f1ee)
-- [Proof of Concept 1](https://www.nextgov.com/emerging-tech/2019/05/census-thinks-clippy-style-ai-assistant-could-speed-security-authorizations/157339/)
+- [Proof of Concept One Presentation](https://census.webex.com/census/ldr.php?RCID=9486aa77f0aeb069cd681c9ad6a5f1ee)
+- [Proof of Concept One Research Article](https://www.nextgov.com/emerging-tech/2019/05/census-thinks-clippy-style-ai-assistant-could-speed-security-authorizations/157339/)
 - [Code information](docs/usage.md)
 
 ## Call for collaborators
