@@ -8,6 +8,13 @@ The goal of FISMAtic is to reduce the amount of time spent authoring, reviewing,
   
 - Help compliance teams select security controls that are appropriate to a system (tailored baselines)
   - This can cut out time spent around irrelevant controls in all other steps of the compliance lifecycle
+ 
+## Status
+ **This repository has been archived and is no longer maintained.**
+ 
+ The code is provided for historical reference and may contain unpatched or unknown vulnerabilities.
+ 
+ It should not be used in production systems.
 
 ## Table of contents
 
